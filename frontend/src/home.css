@@ -1,0 +1,75 @@
+
+.left-side {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--n0);
+    border-right: 1px solid var(--n30);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.left-side::before {
+    content: "🐝 TaskHive";
+    display: flex;
+    align-items: center;
+    height: var(--topbar-height);
+    padding: 0 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, var(--brand-900), var(--brand-800));
+}
+
+.left-side ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.left-side li {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--n70);
+    transition: background 0.15s ease;
+}
+
+.left-side li:hover {
+    background: var(--brand-50);
+    color: var(--brand-700);
+}
+
+.right-side {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    background: var(--n20);
+    padding: 32px;
+}
+
+.right-side::before {
+    content: "";
+    position: fixed;
+    left: var(--sidebar-width);
+    right: 0;
+    top: 0;
+    height: var(--topbar-height);
+    background: var(--n0);
+    border-bottom: 1px solid var(--n30);
+    box-shadow: var(--shadow-xs);
+}
+
+.right-side h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 24px;
+    color: var(--n90);
+}

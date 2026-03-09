@@ -1,0 +1,82 @@
+/* ============================================================
+   team-page.css — Team Members (TaskHive)
+   ============================================================ */
+
+/* ---- Page Wrapper ---- */
+.team {
+    position: absolute;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    min-height: 100vh;
+    background-color: var(--n20);
+}
+
+/* ---- TaskHive Page Header Bar ---- */
+.team::before {
+    content: '🐝 TaskHive  ›  Team';
+    display: flex;
+    align-items: center;
+    height: var(--topbar-height);
+    padding: 0 var(--sp-500);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n60);
+    background: var(--n0);
+    border-bottom: 1px solid var(--n30);
+    letter-spacing: 0.01em;
+    box-shadow: var(--shadow-xs);
+}
+
+.team h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--n90);
+    margin-top: calc(var(--topbar-height) + var(--sp-400));
+    padding: 0 var(--sp-500);
+    margin-bottom: var(--sp-300);
+}
+
+/* ---- Member Cards Wrapper ---- */
+.team {
+    display: block;
+}
+
+/* ---- Member Card ---- */
+.member {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-150);
+    background-color: var(--n0);
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-md);
+    padding: var(--sp-200) var(--sp-300);
+    margin: 0 var(--sp-150) var(--sp-200) var(--sp-500);
+    box-shadow: var(--shadow-xs);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--n80);
+    transition: box-shadow 0.15s, transform 0.12s, border-color 0.12s;
+}
+
+.member:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--brand-300);
+    color: var(--brand-700);
+}
+
+/* ---- Avatar Circle via ::before ---- */
+.member::before {
+    content: '👤';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand-400), var(--brand-700));
+    font-size: 16px;
+    flex-shrink: 0;
+}

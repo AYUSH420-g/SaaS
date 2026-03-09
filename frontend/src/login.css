@@ -1,0 +1,106 @@
+/* ============================================================
+   login.css — Login Page (TaskHive)
+   ============================================================ */
+
+body {
+    background: linear-gradient(145deg, var(--brand-900) 0%, var(--brand-800) 45%, var(--brand-600) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Page centering container */
+div:has(> div > form) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: var(--sp-300);
+}
+
+/* ---- TaskHive Brand Logo ---- */
+div:has(> div > form)::before {
+    content: '🐝 TaskHive';
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--n0);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--sp-300);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ---- Inner card wrapper ---- */
+div:has(> form) {
+    background-color: var(--n0);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--sp-500);
+    width: 100%;
+    max-width: 380px;
+}
+
+/* ---- Form ---- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-200);
+    width: 100%;
+}
+
+form br {
+    display: none;
+}
+
+form::before {
+    content: 'Log in to your account';
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--n90);
+    text-align: center;
+    margin-bottom: var(--sp-100);
+    line-height: 1.3;
+}
+
+form::after {
+    content: 'Sign in securely to TaskHive';
+    display: block;
+    font-size: 13px;
+    color: var(--n50);
+    text-align: center;
+    margin-bottom: var(--sp-100);
+    margin-top: calc(-1 * var(--sp-100));
+}
+
+input[type="text"],
+input[type="password"] {
+    height: 42px;
+    margin-bottom: 0;
+}
+
+input[type="submit"] {
+    width: 100%;
+    height: 42px;
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--n0);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+    margin-top: var(--sp-050);
+    box-shadow: 0 4px 12px rgba(80, 70, 229, 0.4);
+}
+
+input[type="submit"]:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+input[type="submit"]:active {
+    transform: translateY(0);
+}

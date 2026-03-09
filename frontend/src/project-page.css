@@ -1,0 +1,151 @@
+/* ============================================================
+   project-page.css — Projects (TaskHive)
+   ============================================================ */
+
+/* ---- Page Wrapper ---- */
+.projects {
+    position: absolute;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    min-height: 100vh;
+    background-color: var(--n20);
+}
+
+/* ---- Header Bar ---- */
+.projects::before {
+    content: '🐝 TaskHive  ›  Projects';
+    display: flex;
+    align-items: center;
+    height: var(--topbar-height);
+    padding: 0 var(--sp-500);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n60);
+    background: var(--n0);
+    border-bottom: 1px solid var(--n30);
+    letter-spacing: 0.01em;
+    box-shadow: var(--shadow-xs);
+}
+
+/* ---- Page Title ---- */
+.projects h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--n90);
+    margin-top: calc(var(--topbar-height) + var(--sp-400));
+    padding: 0 var(--sp-500);
+    margin-bottom: var(--sp-150);
+}
+
+/* ---- Create Button ---- */
+.projects > button {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 var(--sp-500) var(--sp-400);
+    height: 32px;
+    padding: 0 var(--sp-200);
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+    color: var(--n0);
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(80, 70, 229, 0.3);
+    transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.projects > button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ---- Project Grid ---- */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--sp-300);
+    padding: 0 var(--sp-500) var(--sp-500);
+}
+
+/* ---- Project Card ---- */
+.project-card {
+    background-color: var(--n0);
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-md);
+    padding: var(--sp-300) var(--sp-300) var(--sp-300) calc(var(--sp-300) + 6px);
+    box-shadow: var(--shadow-xs);
+    transition: box-shadow 0.15s ease, transform 0.12s ease;
+    min-height: 140px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Accent border */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(180deg, var(--brand-400), var(--brand-600));
+}
+
+/* Hover Effect */
+.project-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* Project Name */
+.project-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--n90);
+    margin-bottom: var(--sp-100);
+}
+
+/* Meta Info */
+.project-meta {
+    font-size: 13px;
+    color: var(--n60);
+    margin-bottom: var(--sp-200);
+}
+
+/* Progress Bar */
+.progress-bar {
+    height: 6px;
+    background: var(--n30);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: var(--sp-200);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 60%;
+    background: linear-gradient(135deg, var(--brand-400), var(--brand-600));
+}
+
+/* Action Buttons */
+.project-actions {
+    display: flex;
+    gap: var(--sp-100);
+}
+
+.project-actions button {
+    border: none;
+    background: var(--n40);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.project-actions button:hover {
+    background: var(--n50);
+}

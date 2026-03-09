@@ -1,0 +1,85 @@
+/* ============================================================
+   create-project.css — Create Project (TaskHive)
+   ============================================================ */
+
+/* ---- Page Wrapper ---- */
+.create-project {
+    max-width: 640px;
+    background: var(--n0);
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-md);
+    padding: var(--sp-500);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ---- Title ---- */
+.create-project h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--n90);
+    margin-bottom: var(--sp-400);
+}
+
+/* ---- Form Layout ---- */
+.project-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-300);
+}
+
+/* ---- Form Group ---- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* ---- Labels ---- */
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n70);
+}
+
+/* ---- Inputs ---- */
+.form-group input,
+.form-group textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    outline: none;
+    transition: border 0.15s ease;
+    background: var(--n0);
+}
+
+/* ---- Textarea Size ---- */
+.form-group textarea {
+    resize: none;
+    min-height: 100px;
+}
+
+/* ---- Input Focus ---- */
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--brand-500);
+}
+
+/* ---- Submit Button ---- */
+.project-form button {
+    margin-top: var(--sp-200);
+    height: 36px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+    color: var(--n0);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.project-form button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}

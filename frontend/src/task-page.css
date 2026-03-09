@@ -1,0 +1,116 @@
+/* ============================================================
+   task-page.css — Task List (TaskHive)
+   ============================================================ */
+
+/* ---- Page Wrapper ---- */
+.tasks {
+    position: absolute;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    min-height: 100vh;
+    background-color: var(--n20);
+}
+
+/* ---- TaskHive Page Header Bar ---- */
+.tasks::before {
+    content: '🐝 TaskHive  ›  Tasks';
+    display: flex;
+    align-items: center;
+    height: var(--topbar-height);
+    padding: 0 var(--sp-500);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n60);
+    background: var(--n0);
+    border-bottom: 1px solid var(--n30);
+    letter-spacing: 0.01em;
+    box-shadow: var(--shadow-xs);
+}
+
+/* ---- Main Content ---- */
+.tasks h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--n90);
+    margin-bottom: var(--sp-300);
+}
+
+.tasks>h1,
+.tasks>button,
+.tasks>table {
+    margin-left: var(--sp-500);
+    margin-right: var(--sp-500);
+}
+
+.tasks>h1 {
+    margin-top: calc(var(--topbar-height) + var(--sp-400));
+}
+
+.tasks>button {
+    margin-bottom: var(--sp-300);
+    height: 32px;
+    padding: 0 var(--sp-200);
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+    color: var(--n0);
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(80, 70, 229, 0.3);
+    transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.tasks>button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ---- Issues Table ---- */
+table {
+    width: calc(100% - 80px);
+    margin-left: var(--sp-500);
+    border-collapse: collapse;
+    background-color: var(--n0);
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+thead {
+    background-color: var(--n20);
+    border-bottom: 2px solid var(--n30);
+}
+
+thead th {
+    text-align: left;
+    padding: 10px var(--sp-200);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--n60);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--n20);
+    transition: background-color 0.1s;
+    cursor: pointer;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: var(--brand-50);
+}
+
+tbody td {
+    padding: 12px var(--sp-200);
+    font-size: 14px;
+    color: var(--n80);
+    vertical-align: middle;
+}

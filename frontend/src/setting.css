@@ -1,0 +1,93 @@
+/* ============================================================
+   setting.css — Settings Page (TaskHive)
+   ============================================================ */
+
+/* ---- Page Wrapper ---- */
+.settings {
+    position: absolute;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    min-height: 100vh;
+    background-color: var(--n20);
+}
+
+/* ---- TaskHive Page Header Bar ---- */
+.settings::before {
+    content: '🐝 TaskHive  ›  Settings';
+    display: flex;
+    align-items: center;
+    height: var(--topbar-height);
+    padding: 0 var(--sp-500);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n60);
+    background: var(--n0);
+    border-bottom: 1px solid var(--n30);
+    letter-spacing: 0.01em;
+    box-shadow: var(--shadow-xs);
+}
+
+.settings h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--n90);
+    margin-top: calc(var(--topbar-height) + var(--sp-400));
+    padding: 0 var(--sp-500);
+    margin-bottom: var(--sp-400);
+    padding-bottom: var(--sp-200);
+    border-bottom: 1px solid var(--n30);
+}
+
+/* ---- Settings Container ---- */
+.settings-panel {
+    background-color: var(--n0);
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 var(--sp-500);
+}
+
+/* ---- Settings Row ---- */
+.settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-200) var(--sp-300);
+    border-bottom: 1px solid var(--n20);
+    transition: background-color 0.1s;
+}
+
+.settings-row:last-child {
+    border-bottom: none;
+}
+
+.settings-row:hover {
+    background-color: var(--brand-50);
+}
+
+.settings-row__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--n90);
+}
+
+.settings-row__desc {
+    font-size: 12px;
+    color: var(--n50);
+    margin-top: 2px;
+}
+
+/* ---- Section Title ---- */
+.settings-section-title {
+    padding: var(--sp-150) var(--sp-300) var(--sp-050);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--n60);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background-color: var(--n10);
+    border-bottom: 1px solid var(--n30);
+}
