@@ -1,0 +1,91 @@
+/* ============================================================
+   project-details.css — Task Page (TaskHive)
+   ============================================================ */
+
+/* ---- Page Wrapper ---- */
+.project-details {
+    padding: var(--sp-500);
+}
+
+/* ---- Title ---- */
+.project-details h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--n90);
+    margin-bottom: var(--sp-300);
+}
+
+/* ---- Add Task Button ---- */
+.add-task-btn {
+    margin-bottom: var(--sp-400);
+    height: 34px;
+    padding: 0 var(--sp-200);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: var(--shadow-xs);
+}
+
+.add-task-btn:hover {
+    opacity: 0.9;
+}
+
+/* ---- Task List Grid ---- */
+.task-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--sp-300);
+}
+
+/* ---- Task Card ---- */
+.task-card {
+    background: var(--n0);
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-md);
+    padding: var(--sp-300);
+    box-shadow: var(--shadow-xs);
+    transition: 0.2s;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ---- Task Title ---- */
+.task-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: var(--sp-100);
+    color: var(--n90);
+}
+
+/* ---- Task Info ---- */
+.task-card p {
+    font-size: 13px;
+    color: var(--n60);
+    margin-bottom: 4px;
+}
+
+/* ---- Task Actions ---- */
+.task-actions {
+    margin-top: var(--sp-200);
+    display: flex;
+    gap: var(--sp-100);
+}
+
+.task-actions button {
+    border: none;
+    background: var(--n20);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.task-actions button:hover {
+    background: var(--n30);
+}

@@ -1,6 +1,6 @@
 import express from "express";
 const router=express.Router();
-import {sgnup,lgin} from '../components/auth.component.js';
+import {sgnup,lgin} from '../controller/auth.controller.js';
 
 router.post("/signup",sgnup);
 router.post("/login",lgin);

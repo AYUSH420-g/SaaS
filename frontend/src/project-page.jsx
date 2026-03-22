@@ -15,6 +15,16 @@ function Project() {
         navigate("/create-project");
     }
 
+    function viewbutton()
+    {
+        navigate("/projectdetails")
+    }
+
+    function editbutton()
+    {
+        navigate("/add-single-task")
+    }
+
    useEffect(() => {
 
     const fetchProjects = async () => {
@@ -59,8 +69,8 @@ function Project() {
                         </div>
 
                         <div className="project-actions">
-                            <button>View</button>
-                            <button>Edit</button>
+                            <button onClick={viewbutton}>View</button>
+                            <button onClick={editbutton}>Edit</button>
                             <button>Delete</button>
                         </div>
 

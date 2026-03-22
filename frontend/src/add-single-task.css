@@ -1,0 +1,95 @@
+/* ============================================================
+   add-single-task.css — Create Task (TaskHive)
+   ============================================================ */
+
+/* ---- Wrapper ---- */
+.create-task {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--n0);
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-md);
+    padding: var(--sp-500);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ---- Title ---- */
+.create-task h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--n90);
+    margin-bottom: var(--sp-400);
+}
+
+/* ---- Form Layout ---- */
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-300);
+}
+
+/* ---- Form Group ---- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* ---- Labels ---- */
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n70);
+}
+
+/* ---- Inputs ---- */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 10px 12px;
+    border: 1px solid var(--n30);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    outline: none;
+    background: var(--n0);
+    transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* ---- Textarea ---- */
+.form-group textarea {
+    min-height: 110px;
+    resize: none;
+}
+
+/* ---- Focus Effect ---- */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--brand-500);
+    box-shadow: 0 0 0 2px rgba(80, 70, 229, 0.15);
+}
+
+/* ---- Button ---- */
+.task-form button {
+    margin-top: var(--sp-200);
+    height: 36px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+    color: var(--n0);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.15s ease;
+}
+
+/* ---- Button Hover ---- */
+.task-form button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ---- Button Active ---- */
+.task-form button:active {
+    transform: translateY(0);
+}

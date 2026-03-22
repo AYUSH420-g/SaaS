@@ -8,6 +8,8 @@ import Team from './team-page';
 import Setting from './setting';
 import Dashboard from './dashboard';
 import CreateProject from './create-project';
+import Projectdetails from './projectdetails';
+import Ast from './add-single-task';
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path='/team-page' element={<Team/>}/>
         <Route path='/setting' element={<Setting/>}/>
         <Route path='/create-project' element={<CreateProject/>}/>
+        <Route path='/projectdetails' element={<Projectdetails/>}/>
+        <Route path='/add-single-task' element={<Ast/>}/>
       </Route>
     </Routes>
   )
