@@ -25,11 +25,11 @@ const taskSchema = new mongoose.Schema(
       default: "Todo"
     },
 
-    // project_id: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "Project",
-    //   required: true
-    // }
+    project_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+      required: true
+    }
   },
   {
     timestamps: true

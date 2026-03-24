@@ -1,91 +1,86 @@
-/* ============================================================
-   project-details.css — Task Page (TaskHive)
-   ============================================================ */
-
-/* ---- Page Wrapper ---- */
+/* Main container */
 .project-details {
-    padding: var(--sp-500);
+    padding: 30px;
+    background-color: #f5f7fa;
+    min-height: 100vh;
 }
 
-/* ---- Title ---- */
+/* Heading */
 .project-details h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--n90);
-    margin-bottom: var(--sp-300);
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
 }
 
-/* ---- Add Task Button ---- */
-.add-task-btn {
-    margin-bottom: var(--sp-400);
-    height: 34px;
-    padding: 0 var(--sp-200);
-    border: none;
-    border-radius: var(--radius-sm);
-    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    box-shadow: var(--shadow-xs);
-}
-
-.add-task-btn:hover {
-    opacity: 0.9;
-}
-
-/* ---- Task List Grid ---- */
+/* Task list grid */
 .task-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: var(--sp-300);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
-/* ---- Task Card ---- */
+/* Card */
 .task-card {
-    background: var(--n0);
-    border: 1px solid var(--n30);
-    border-radius: var(--radius-md);
-    padding: var(--sp-300);
-    box-shadow: var(--shadow-xs);
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+.task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Title */
+.task-card h3 {
+    margin-bottom: 10px;
+    color: #222;
+}
+
+/* Text */
+.task-card p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Buttons container */
+.task-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Buttons */
+.task-actions button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
     transition: 0.2s;
 }
 
-.task-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+/* Individual button colors */
+.task-actions button:nth-child(1) {
+    background-color: #3498db;
+    color: white;
 }
 
-/* ---- Task Title ---- */
-.task-card h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: var(--sp-100);
-    color: var(--n90);
+.task-actions button:nth-child(2) {
+    background-color: #f39c12;
+    color: white;
 }
 
-/* ---- Task Info ---- */
-.task-card p {
-    font-size: 13px;
-    color: var(--n60);
-    margin-bottom: 4px;
+.task-actions button:nth-child(3) {
+    background-color: #e74c3c;
+    color: white;
 }
 
-/* ---- Task Actions ---- */
-.task-actions {
-    margin-top: var(--sp-200);
-    display: flex;
-    gap: var(--sp-100);
-}
-
-.task-actions button {
-    border: none;
-    background: var(--n20);
-    padding: 4px 8px;
-    border-radius: var(--radius-sm);
-    font-size: 12px;
-    cursor: pointer;
-}
-
+/* Hover effect */
 .task-actions button:hover {
-    background: var(--n30);
+    opacity: 0.8;
 }

@@ -15,14 +15,14 @@ function Project() {
         navigate("/create-project");
     }
 
-    function viewbutton()
+    function viewbutton(id)
     {
-        navigate("/projectdetails")
+        navigate(`/projectdetails/${id}`)
     }
 
-    function editbutton()
+    function editbutton(id)
     {
-        navigate("/add-single-task")
+        navigate(`/add-single-task/${id}`)
     }
 
    useEffect(() => {
@@ -69,8 +69,8 @@ function Project() {
                         </div>
 
                         <div className="project-actions">
-                            <button onClick={viewbutton}>View</button>
-                            <button onClick={editbutton}>Edit</button>
+                            <button onClick={()=>viewbutton(p._id)}>View</button>
+                            <button onClick={()=>editbutton(p._id)}>Edit</button>
                             <button>Delete</button>
                         </div>
 

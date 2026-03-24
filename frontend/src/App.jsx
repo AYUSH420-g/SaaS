@@ -20,13 +20,13 @@ function App() {
       <Route path='/signup' element={<Signup/>}/>
       <Route element={<Home/>}>
         <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/project-page' element={<Project/>}/>
+        <Route path='/project-page/' element={<Project/>}/>
         <Route path='/task-page' element={<Task/>}/>
         <Route path='/team-page' element={<Team/>}/>
         <Route path='/setting' element={<Setting/>}/>
         <Route path='/create-project' element={<CreateProject/>}/>
-        <Route path='/projectdetails' element={<Projectdetails/>}/>
-        <Route path='/add-single-task' element={<Ast/>}/>
+        <Route path='/projectdetails/:id' element={<Projectdetails/>}/>
+        <Route path='/add-single-task/:id' element={<Ast/>}/>
       </Route>
     </Routes>
   )

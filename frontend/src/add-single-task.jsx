@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./add-single-task.css";
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 function Ast() {
 
     const [title, setTitle] = useState('');
@@ -9,21 +9,23 @@ function Ast() {
     const [priority, setPriority] = useState('Low');
     const [status, setStatus] = useState('Todo');
     const navigate=useNavigate();
+    const {id}=useParams();
 
     const create_task=async (e)=>{
             e.preventDefault();
         try{
-
+            console.log(id);
             const res=await axios.post("http://localhost:3003/task",
                 {
                     title:title,
                     description:description,
                     priority:priority,
-                    status:status
+                    status:status,
+                    project_id:id
                 }
 
             )
-            navigate("/projectdetails");
+            navigate("/project-page");
 
         }
         catch(err)
