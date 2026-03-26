@@ -1,4 +1,5 @@
 import Task from "../models/task.model.js";
+import Project from "../models/project.model.js";
 
 const v=async(req,res)=>{
 
@@ -37,4 +38,35 @@ const g=async(req,res)=>{
         console.log(err);
     }
 }
-export {v,g};
+
+const dt=async(req,res)=>{
+
+    try{
+        const task=await Task.find();
+        res.status(200).json(task);
+    }
+    catch(err)
+    {
+        
+        console.log(err);
+    }
+
+}
+
+const dp = async (req, res) => {
+    console.log("BACK IN");
+    try {
+        const id = req.params.id;
+        const resp = await Task.deleteMany({ project_id: id });
+        const data = await Project.findByIdAndDelete(id);
+        if (!data) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+        res.status(200).json({ message: "Deleted successfully", data });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: err.message });
+    }
+};
+export {v,g,dt,dp};

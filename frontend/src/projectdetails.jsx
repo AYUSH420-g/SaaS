@@ -41,8 +41,6 @@ function Projectdetails() {
                         <p>Status: {task.status}</p>
 
                         <div className="task-actions">
-                            <button>View</button>
-                            <button>Edit</button>
                             <button>Delete</button>
                         </div>
                     </div>

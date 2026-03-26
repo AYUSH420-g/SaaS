@@ -10,6 +10,7 @@ function Project() {
 
     const navigate=useNavigate();
     const[projectdata,setprojdata]=useState([]);
+    const [reload,setreload]=useState(false);
     function cppage()
     {
         navigate("/create-project");
@@ -24,6 +25,22 @@ function Project() {
     {
         navigate(`/add-single-task/${id}`)
     }
+    const delbutton= async(id)=> 
+    {
+        try{
+            const res=await axios.delete(`http://localhost:3003/deleteproj/${id}`);
+            console.log(res.data);
+            
+            console.log("Successfully deleted");
+            
+            setreload(reload => !reload);
+            
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+    }
 
    useEffect(() => {
 
@@ -31,9 +48,10 @@ function Project() {
         try {
 
             const res = await axios.get("http://localhost:3003/displayproject");
-
             setprojdata(res.data);
-            console.log(res.data);
+            // console.log(res.data);
+            console.log("in");
+            
 
         } 
         catch (err) {
@@ -43,7 +61,7 @@ function Project() {
 
         fetchProjects();
 
-    }, []);
+    }, [reload]);
 
     return (
         <div className="projects">
@@ -70,8 +88,8 @@ function Project() {
 
                         <div className="project-actions">
                             <button onClick={()=>viewbutton(p._id)}>View</button>
-                            <button onClick={()=>editbutton(p._id)}>Edit</button>
-                            <button>Delete</button>
+                            <button onClick={()=>editbutton(p._id)}>Add task</button>
+                            <button onClick={()=>delbutton(p._id)}>Delete</button>
                         </div>
 
                     </div>
