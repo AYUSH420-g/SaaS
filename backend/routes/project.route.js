@@ -1,13 +1,14 @@
 import express from "express";
 import  { proj,dproj } from "../controller/projct.controller.js";
-import {v,g, dt,dp} from "../controller/task.controller.js";
+import {v,g, dt,dp,gc} from "../controller/task.controller.js";
 const router=express.Router();
 
-router.post("/projects",proj);
+router.post("/createproject",proj);
 router.get("/displayproject",dproj);
-router.post("/task",v);
+router.post("/createtask/:id",v);
 router.get("/gettask/:id",g);
 router.get("/displaytask",dt);
 router.delete("/deleteproj/:id",dp);
+router.get("/getcount",gc);
 
 export default router;

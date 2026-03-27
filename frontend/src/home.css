@@ -1,75 +1,215 @@
+/* ============================================================
+   home.css — App Layout Shell (TaskHive)
+   Dark Mode Sidebar & Topbar
+   ============================================================ */
 
-.left-side {
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-app);
+}
+
+/* ── Sidebar ── */
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
     width: var(--sidebar-width);
     height: 100vh;
-    background: var(--n0);
-    border-right: 1px solid var(--n30);
+    background-color: var(--bg-surface);
+    border-right: 1px solid var(--border-subtle);
     display: flex;
     flex-direction: column;
     z-index: 100;
+    transition: all var(--transition-fast);
 }
 
-.left-side::before {
-    content: "🐝 TaskHive";
+/* ── Brand Header ── */
+.sidebar-header {
+    height: var(--topbar-height);
     display: flex;
     align-items: center;
-    height: var(--topbar-height);
-    padding: 0 16px;
-    font-size: 18px;
-    font-weight: 700;
-    color: white;
-    background: linear-gradient(135deg, var(--brand-900), var(--brand-800));
+    gap: var(--sp-150);
+    padding: 0 var(--sp-300);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
-.left-side ul {
+.sidebar-header .brand-logo {
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+}
+
+.sidebar-header h2 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #fff, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ── Navigation ── */
+.sidebar-nav {
+    flex: 1;
+    padding: var(--sp-300) var(--sp-200);
+    overflow-y: auto;
+}
+
+.sidebar-nav ul {
     list-style: none;
-    padding: 10px;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-050);
 }
 
-.left-side li {
-    height: 38px;
+/* Nav Item */
+.sidebar-nav li {
     display: flex;
     align-items: center;
-    padding-left: 12px;
-    border-radius: 6px;
+    gap: var(--sp-150);
+    height: 44px;
+    padding: 0 var(--sp-200);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-weight: 600;
     cursor: pointer;
-    font-size: 14px;
-    color: var(--n70);
-    transition: background 0.15s ease;
+    transition: all var(--transition-fast);
+    position: relative;
 }
 
-.left-side li:hover {
-    background: var(--brand-50);
-    color: var(--brand-700);
+/* Icon */
+.sidebar-nav li svg {
+    color: var(--text-dim);
+    transition: color var(--transition-fast);
 }
 
-.right-side {
+/* Hover State */
+.sidebar-nav li:hover {
+    background-color: var(--bg-surface-hover);
+    color: var(--text-main);
+}
+
+.sidebar-nav li:hover svg {
+    color: var(--brand-primary);
+}
+
+/* Active State */
+.sidebar-nav li.active {
+    background-color: rgba(34, 211, 238, 0.1);
+    color: var(--neon-cyan);
+}
+
+.sidebar-nav li.active svg {
+    color: var(--neon-cyan);
+}
+
+/* Active Left Glow Accent */
+.sidebar-nav li.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    background: var(--neon-cyan);
+    border-radius: 0 4px 4px 0;
+    box-shadow: 2px 0 8px var(--neon-cyan-glow);
+}
+
+/* ── Sidebar Footer ── */
+.sidebar-footer {
+    padding: var(--sp-300) var(--sp-200);
+    border-top: 1px solid var(--border-subtle);
+}
+
+/* Logout Button styling specific to sidebar */
+.logout-btn {
+    width: 100%;
+    justify-content: flex-start;
+    background: transparent;
+    color: var(--text-muted);
+    box-shadow: none;
+    border: none;
+    padding: 0 var(--sp-200);
+    height: 44px;
+}
+
+.logout-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--status-danger);
+    transform: none;
+}
+
+.logout-btn svg {
+    color: var(--text-dim);
+}
+
+.logout-btn:hover svg {
+    color: var(--status-danger);
+}
+
+/* ── Main Content Area ── */
+.main-content {
+    flex: 1;
     margin-left: var(--sidebar-width);
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    background: var(--n20);
-    padding: 32px;
 }
 
-.right-side::before {
-    content: "";
-    position: fixed;
-    left: var(--sidebar-width);
-    right: 0;
-    top: 0;
+/* ── Topbar ── */
+.topbar {
     height: var(--topbar-height);
-    background: var(--n0);
-    border-bottom: 1px solid var(--n30);
-    box-shadow: var(--shadow-xs);
+    background-color: rgba(9, 9, 11, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-500);
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 
-.right-side h1 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 40px;
-    margin-bottom: 24px;
-    color: var(--n90);
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-200);
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--brand-primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 10px var(--brand-glow);
+    transition: transform var(--transition-fast);
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+}
+
+/* ── Content Wrapper ── */
+.content-wrapper {
+    flex: 1;
+    padding: var(--sp-500);
+    animation: fadeIn 0.4s var(--ease-out);
+}
+
+/* Common Page Title Pattern (used inside content) */
+.page-header {
+    margin-bottom: var(--sp-400);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

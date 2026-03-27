@@ -1,97 +1,144 @@
 /* ============================================================
-   signup.css — Signup Page (TaskHive)
+   login.css & signup.css — Auth Pages (TaskHive)
+   Shared styles for dark mode auth screens
    ============================================================ */
 
-body {
-    background: linear-gradient(145deg, var(--brand-900) 0%, var(--brand-800) 45%, var(--brand-600) 100%);
+/* ── Layout ── */
+.auth-layout {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-app);
 }
 
-/* Page centering */
-div:has(> form) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+/* ── Neon Background Glows ── */
+.auth-bg-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.auth-bg-glow.cyan {
+    background: var(--neon-cyan);
+    top: -200px;
+    left: -200px;
+    animation: float 10s ease-in-out infinite;
+}
+
+.auth-bg-glow.purple {
+    background: var(--neon-purple);
+    bottom: -200px;
+    right: -200px;
+    animation: float 12s ease-in-out infinite reverse;
+}
+
+/* ── Container ── */
+.auth-container {
+    position: relative;
+    z-index: 10;
     width: 100%;
+    max-width: 440px;
     padding: var(--sp-300);
 }
 
-/* ---- TaskHive Brand ---- */
-div:has(> form)::before {
-    content: '🐝 TaskHive';
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--n0);
-    letter-spacing: -0.03em;
-    margin-bottom: var(--sp-300);
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+/* ── Header ── */
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--sp-400);
+    animation: slideUpFade 0.6s var(--ease-out);
 }
 
-/* ---- Card ---- */
-form {
-    background-color: var(--n0);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    padding: var(--sp-500);
-    width: 100%;
-    max-width: 400px;
+.brand-logo {
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 10px var(--neon-cyan-glow));
+    margin-bottom: var(--sp-200);
+}
+
+.auth-header h1 {
+    font-size: 32px;
+    margin-bottom: var(--sp-050);
+}
+
+.auth-header p {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* ── Glass Form Box ── */
+.auth-form {
+    padding: var(--sp-500) var(--sp-400);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-200);
+    gap: var(--sp-300);
+    animation: slideUpFade 0.6s var(--ease-out) 0.1s both;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-form br {
-    display: none;
+/* ── Input Groups ── */
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
-form::before {
-    content: 'Create your account';
-    display: block;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--n90);
+.input-icon-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon-group .input-icon {
+    position: absolute;
+    left: 14px;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+    pointer-events: none;
+}
+
+.input-icon-group input {
+    padding-left: 42px;
+    height: 48px;
+}
+
+.input-wrapper:focus-within .input-icon {
+    color: var(--neon-cyan);
+}
+
+/* ── Submit Button ── */
+.submit-btn {
+    height: 48px;
+    margin-top: var(--sp-100);
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 800;
+}
+
+/* ── Footer Link ── */
+.auth-footer {
     text-align: center;
-    margin-bottom: var(--sp-100);
+    margin-top: var(--sp-200);
+    font-size: 14px;
+    color: var(--text-dim);
 }
 
-form::after {
-    content: 'Join TaskHive — get work done faster';
-    display: block;
-    font-size: 13px;
-    color: var(--n50);
-    text-align: center;
-    margin-bottom: var(--sp-100);
-    margin-top: calc(-1 * var(--sp-100));
-}
-
-input[type="text"],
-input[type="password"] {
-    height: 42px;
-    margin-bottom: 0;
-}
-
-input[type="submit"] {
-    width: 100%;
-    height: 42px;
-    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
-    border-radius: var(--radius-sm);
-    font-size: 15px;
+.auth-link {
+    color: var(--brand-primary);
     font-weight: 600;
-    color: var(--n50);
-    background-color: #5046e566;;
-    border: none;
     cursor: pointer;
-    transition: opacity 0.15s ease, transform 0.1s ease;
-    margin-top: var(--sp-050);
-    box-shadow: 0 4px 12px #5046e566;
+    transition: all var(--transition-fast);
+    margin-left: 4px;
 }
 
-input[type="submit"]:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
+.auth-link:hover {
+    color: var(--neon-cyan);
+    text-decoration: underline;
+    text-shadow: 0 0 10px var(--neon-cyan-glow);
 }

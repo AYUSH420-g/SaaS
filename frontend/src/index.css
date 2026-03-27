@@ -1,47 +1,52 @@
 /* ============================================================
    TaskHive — Global Design System (index.css)
+   High-End Dark Mode UI with Neon Accents
    ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* ── Brand: Deep Indigo Violet ── */
-  --brand-50: #EEF0FF;
-  --brand-100: #D8DCFF;
-  --brand-200: #B3BBFF;
-  --brand-300: #8D97FF;
-  --brand-400: #6875F5;
-  --brand-500: #5046E5;
-  /* Primary */
-  --brand-600: #4338CA;
-  /* Hover */
-  --brand-700: #3730A3;
-  /* Active */
-  --brand-800: #312E81;
-  /* Dark */
-  --brand-900: #1E1B4B;
-  /* Darkest (topbar) */
+  /* ── Backgrounds & Surfaces (Z-Index Scale) ── */
+  --bg-app: #09090b;
+  /* Darkest, app background */
+  --bg-surface: #18181b;
+  /* Main cards/panels */
+  --bg-surface-hover: #27272a;
+  /* Hover states */
+  --bg-surface-active: #3f3f46;
 
-  /* ── Neutrals ── */
-  --n0: #FFFFFF;
-  --n10: #F8F9FA;
-  --n20: #F1F2F4;
-  --n30: #DCDFE4;
-  --n40: #B3B9C4;
-  --n50: #8590A2;
-  --n60: #626F86;
-  --n70: #44546F;
-  --n80: #2C3E5D;
-  --n90: #172B4D;
+  /* ── Neon Accents ── */
+  --neon-cyan: #22d3ee;
+  --neon-cyan-glow: rgba(34, 211, 238, 0.4);
 
-  /* ── Status Colors ── */
-  --green-100: #DCFFF1;
-  --green-500: #1F845A;
-  --yellow-100: #FFF7D6;
-  --yellow-500: #CF9F02;
-  --red-100: #FFECEB;
-  --red-500: #C9372C;
-  --purple-100: #F3F0FF;
-  --purple-500: #6E5DC6;
+  --neon-purple: #c084fc;
+  --neon-purple-glow: rgba(192, 132, 252, 0.4);
+
+  --neon-pink: #f472b6;
+  --neon-pink-glow: rgba(244, 114, 182, 0.4);
+
+  --brand-primary: #818cf8;
+  --brand-primary-hover: #6366f1;
+  --brand-glow: rgba(99, 102, 241, 0.35);
+
+  /* ── Text Priorities ── */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* ── Borders & Dividers ── */
+  --border-subtle: #27272a;
+  --border-strong: #3f3f46;
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+  /* ── Status Colors (Dark Mode Adjusted) ── */
+  --status-success: #10b981;
+  --status-success-bg: rgba(16, 185, 129, 0.15);
+  --status-warning: #f59e0b;
+  --status-warning-bg: rgba(245, 158, 11, 0.15);
+  --status-danger: #ef4444;
+  --status-danger-bg: rgba(239, 68, 68, 0.15);
+  --status-info: #3b82f6;
+  --status-info-bg: rgba(59, 130, 246, 0.15);
 
   /* ── Typography ── */
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -54,33 +59,44 @@
   --sp-300: 24px;
   --sp-400: 32px;
   --sp-500: 40px;
+  --sp-600: 48px;
 
   /* ── Layout ── */
-  --sidebar-width: 240px;
-  --topbar-height: 56px;
+  --sidebar-width: 250px;
+  --topbar-height: 64px;
 
   /* ── Borders ── */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-pill: 999px;
 
   /* ── Shadows ── */
-  --shadow-xs: 0 1px 2px rgba(30, 27, 75, .08);
-  --shadow-sm: 0 1px 4px rgba(30, 27, 75, .12), 0 0 1px rgba(30, 27, 75, .2);
-  --shadow-md: 0 4px 12px rgba(30, 27, 75, .15), 0 0 1px rgba(30, 27, 75, .2);
-  --shadow-lg: 0 8px 24px rgba(30, 27, 75, .15), 0 0 2px rgba(30, 27, 75, .2);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+
+  /* ── Transitions ── */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.15s var(--ease-out);
+  --transition-base: 0.25s var(--ease-out);
+  --transition-slow: 0.4s var(--ease-out);
 
   font-family: var(--font);
   font-size: 14px;
-  color: var(--n90);
-  background-color: var(--n20);
-  line-height: 1.5;
+  color: var(--text-main);
+  background-color: var(--bg-app);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ============================================================
-   Resets
+   Resets & Globals
    ============================================================ */
 *,
 *::before,
@@ -90,41 +106,147 @@
   padding: 0;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
 body {
   height: 100%;
-  background-color: var(--n20);
+  background-color: var(--bg-app);
 }
 
 #root {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+::selection {
+  background: var(--brand-glow);
+  color: var(--neon-cyan);
+}
+
+/* Custom Dark Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}
+
+/* ============================================================
+   Keyframe Animations
+   ============================================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightFade {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+
+  50% {
+    box-shadow: 0 0 15px var(--neon-cyan-glow);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes gradientSpin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================
+   Typography Typography
+   ============================================================ */
 h1 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--n90);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 
 h2 {
   font-size: 20px;
-  font-weight: 600;
-  color: var(--n90);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
 }
 
 h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--n80);
+  color: var(--text-main);
 }
 
 a {
-  color: var(--brand-500);
+  color: var(--brand-primary);
   text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 a:hover {
-  text-decoration: underline;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan-glow);
 }
 
 /* ============================================================
@@ -135,36 +257,44 @@ input[type="submit"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--sp-050);
-  height: 32px;
-  padding: 0 var(--sp-150);
-  border: none;
+  gap: var(--sp-100);
+  height: 38px;
+  padding: 0 var(--sp-200);
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
   font-family: var(--font);
   font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
+  font-weight: 600;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.12s ease, box-shadow 0.12s ease;
-  background-color: var(--brand-500);
-  color: var(--n0);
+  transition: all var(--transition-fast);
+  background: var(--bg-surface-hover);
+  color: var(--text-main);
+  box-shadow: var(--shadow-xs);
+}
+
+button.primary,
+input[type="submit"] {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 14px var(--brand-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 button:hover,
 input[type="submit"]:hover {
-  background-color: var(--brand-600);
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+button.primary:hover,
+input[type="submit"]:hover {
+  box-shadow: 0 6px 20px var(--brand-glow), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 button:active,
 input[type="submit"]:active {
-  background-color: var(--brand-700);
-}
-
-button:focus-visible,
-input[type="submit"]:focus-visible {
-  outline: 2px solid var(--brand-400);
-  outline-offset: 2px;
+  transform: translateY(0);
+  filter: brightness(0.9);
 }
 
 /* ============================================================
@@ -173,48 +303,74 @@ input[type="submit"]:focus-visible {
 input[type="text"],
 input[type="password"],
 input[type="email"],
+input[type="date"],
 textarea,
 select {
   width: 100%;
-  height: 40px;
-  border: 2px solid var(--n30);
+  height: 42px;
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
-  background-color: var(--n10);
+  background-color: var(--bg-surface);
   padding: 0 var(--sp-150);
   font-family: var(--font);
   font-size: 14px;
-  color: var(--n90);
-  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
   outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-input[type="text"]:hover,
-input[type="password"]:hover,
-input[type="email"]:hover {
-  border-color: var(--n40);
-  background-color: var(--n0);
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--text-dim);
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus {
-  border-color: var(--brand-400);
-  background-color: var(--n0);
-  box-shadow: 0 0 0 3px var(--brand-100);
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--neon-cyan);
+  background-color: var(--bg-app);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 0 3px var(--neon-cyan-glow);
 }
 
-input::placeholder {
-  color: var(--n50);
+textarea {
+  height: auto;
+  padding: var(--sp-150);
+  resize: vertical;
+  line-height: 1.5;
+  min-height: 100px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-dim);
 }
 
 label {
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--n70);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: var(--sp-050);
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  transition: color var(--transition-fast);
+}
+
+.input-wrapper:focus-within label {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan-glow);
+}
+
+/* ============================================================
+   Glass Panels
+   ============================================================ */
+.glass-panel {
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ============================================================
@@ -223,35 +379,48 @@ label {
 .lozenge {
   display: inline-flex;
   align-items: center;
+  gap: 4px;
   border-radius: var(--radius-pill);
-  padding: 2px 8px;
+  padding: 2px 10px 2px 8px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  border: 1px solid transparent;
 }
 
-.lozenge--done {
-  background: var(--green-100);
-  color: var(--green-500);
+.lozenge.done {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
-.lozenge--inprogress {
-  background: var(--brand-50);
-  color: var(--brand-700);
+.lozenge.inprogress {
+  background: var(--status-info-bg);
+  color: var(--neon-cyan);
+  border-color: rgba(34, 211, 238, 0.3);
 }
 
-.lozenge--todo {
-  background: var(--n20);
-  color: var(--n60);
+.lozenge.todo {
+  background: var(--bg-surface-active);
+  color: var(--text-muted);
+  border-color: var(--border-strong);
 }
 
-.lozenge--warning {
-  background: var(--yellow-100);
-  color: var(--yellow-500);
+.lozenge.high {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+  border-color: rgba(239, 68, 68, 0.3);
 }
 
-.lozenge--error {
-  background: var(--red-100);
-  color: var(--red-500);
+.lozenge.medium {
+  background: var(--status-warning-bg);
+  color: var(--status-warning);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.lozenge.low {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+  border-color: rgba(16, 185, 129, 0.3);
 }

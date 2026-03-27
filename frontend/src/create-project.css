@@ -1,85 +1,74 @@
 /* ============================================================
-   create-project.css — Create Project (TaskHive)
+   create-project.css & add-single-task.css
+   Shared form layout for Dark Mode UI
    ============================================================ */
 
-/* ---- Page Wrapper ---- */
-.create-project {
-    max-width: 640px;
-    background: var(--n0);
-    border: 1px solid var(--n30);
-    border-radius: var(--radius-md);
-    padding: var(--sp-500);
-    box-shadow: var(--shadow-sm);
+.create-proj-page,
+.create-task-page {
+    animation: fadeIn 0.4s var(--ease-out);
 }
 
-/* ---- Title ---- */
-.create-project h1 {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--n90);
-    margin-bottom: var(--sp-400);
+/* ── Form Container ── */
+.form-container {
+    max-width: 600px;
+    padding: var(--sp-400);
+    background-color: var(--bg-surface);
+    animation: slideUpFade 0.5s var(--ease-out) 0.1s both;
 }
 
-/* ---- Form Layout ---- */
-.project-form {
+/* ── Standard Form Patterns ── */
+.standard-form {
     display: flex;
     flex-direction: column;
     gap: var(--sp-300);
 }
 
-/* ---- Form Group ---- */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+/* ── Split Row ── */
+.input-row.split-half {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-300);
 }
 
-/* ---- Labels ---- */
-.form-group label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--n70);
+@media (min-width: 640px) {
+    .input-row.split-half {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
-/* ---- Inputs ---- */
-.form-group input,
-.form-group textarea {
-    padding: 10px 12px;
-    border: 1px solid var(--n30);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    outline: none;
-    transition: border 0.15s ease;
-    background: var(--n0);
-}
-
-/* ---- Textarea Size ---- */
-.form-group textarea {
-    resize: none;
-    min-height: 100px;
-}
-
-/* ---- Input Focus ---- */
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: var(--brand-500);
-}
-
-/* ---- Submit Button ---- */
-.project-form button {
-    margin-top: var(--sp-200);
-    height: 36px;
-    border: none;
-    border-radius: var(--radius-sm);
-    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
-    color: var(--n0);
-    font-size: 14px;
-    font-weight: 600;
+/* ── Select Dropdown Fixes ── */
+.select-group select {
+    padding-left: 42px;
+    /* Match icon spacing */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
     cursor: pointer;
-    transition: opacity 0.15s ease, transform 0.1s ease;
 }
 
-.project-form button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+.select-group select:focus {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+/* ── Textarea Fixes ── */
+.textarea-group .input-icon {
+    top: 14px;
+    /* Align icon to top of textarea */
+}
+
+/* ── Submit Button ── */
+.standard-form .submit-btn {
+    margin-top: var(--sp-200);
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .standard-form .submit-btn {
+        width: auto;
+        align-self: flex-start;
+    }
 }

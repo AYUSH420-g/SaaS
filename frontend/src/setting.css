@@ -1,93 +1,209 @@
 /* ============================================================
-   setting.css — Settings Page (TaskHive)
+   setting.css — Settings Panel (TaskHive)
+   Dark Mode Configuration Interface
    ============================================================ */
 
-/* ---- Page Wrapper ---- */
-.settings {
-    position: absolute;
-    top: 0;
-    left: var(--sidebar-width);
-    right: 0;
-    min-height: 100vh;
-    background-color: var(--n20);
+.settings-page {
+    animation: fadeIn 0.4s var(--ease-out);
 }
 
-/* ---- TaskHive Page Header Bar ---- */
-.settings::before {
-    content: '🐝 TaskHive  ›  Settings';
+/* ── Settings Layout ── */
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-400);
+}
+
+@media (min-width: 768px) {
+    .settings-container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+/* ── Sidebar Nav ── */
+.settings-sidebar {
+    width: 100%;
+    animation: slideRightFade 0.4s var(--ease-out) both;
+}
+
+@media (min-width: 768px) {
+    .settings-sidebar {
+        width: 240px;
+        flex-shrink: 0;
+    }
+}
+
+.settings-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.settings-nav li {
     display: flex;
     align-items: center;
-    height: var(--topbar-height);
-    padding: 0 var(--sp-500);
-    font-size: 13px;
+    gap: var(--sp-150);
+    height: 40px;
+    padding: 0 var(--sp-200);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
     font-weight: 600;
-    color: var(--n60);
-    background: var(--n0);
-    border-bottom: 1px solid var(--n30);
-    letter-spacing: 0.01em;
-    box-shadow: var(--shadow-xs);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
 }
 
-.settings h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--n90);
-    margin-top: calc(var(--topbar-height) + var(--sp-400));
-    padding: 0 var(--sp-500);
-    margin-bottom: var(--sp-400);
-    padding-bottom: var(--sp-200);
-    border-bottom: 1px solid var(--n30);
+.settings-nav li:hover {
+    background-color: var(--bg-surface);
+    color: var(--text-main);
 }
 
-/* ---- Settings Container ---- */
-.settings-panel {
-    background-color: var(--n0);
-    border: 1px solid var(--n30);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
+.settings-nav li.active {
+    background-color: var(--bg-surface);
+    color: var(--neon-cyan);
+    box-shadow: inset 2px 0 0 var(--neon-cyan);
+}
+
+/* ── Content Panel ── */
+.settings-content {
+    flex: 1;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    max-width: 700px;
-    margin: 0 var(--sp-500);
+    box-shadow: var(--shadow-sm);
+    animation: slideUpFade 0.5s var(--ease-out) 0.1s both;
 }
 
-/* ---- Settings Row ---- */
-.settings-row {
+/* ── Form Sections ── */
+.settings-section {
+    padding: var(--sp-400);
+}
+
+.settings-section h3 {
+    font-size: 18px;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.section-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: var(--sp-400);
+    padding-bottom: var(--sp-300);
+    border-bottom: 1px solid var(--border-strong);
+}
+
+/* ── Setting Rows ── */
+.setting-row {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--sp-200) var(--sp-300);
-    border-bottom: 1px solid var(--n20);
-    transition: background-color 0.1s;
+    flex-direction: column;
+    gap: var(--sp-200);
+    padding: var(--sp-300) 0;
+    border-bottom: 1px dashed var(--border-strong);
 }
 
-.settings-row:last-child {
+.setting-row:last-child {
     border-bottom: none;
 }
 
-.settings-row:hover {
-    background-color: var(--brand-50);
+@media (min-width: 640px) {
+    .setting-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
-.settings-row__label {
+.setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.setting-info label {
     font-size: 14px;
-    font-weight: 600;
-    color: var(--n90);
-}
-
-.settings-row__desc {
-    font-size: 12px;
-    color: var(--n50);
-    margin-top: 2px;
-}
-
-/* ---- Section Title ---- */
-.settings-section-title {
-    padding: var(--sp-150) var(--sp-300) var(--sp-050);
-    font-size: 11px;
     font-weight: 700;
-    color: var(--n60);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    background-color: var(--n10);
-    border-bottom: 1px solid var(--n30);
+    color: var(--text-main);
+    margin: 0;
+}
+
+.setting-info span {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Select Control */
+.setting-control.select-group {
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .setting-control.select-group {
+        width: 200px;
+    }
+}
+
+/* ── Toggle Switch ── */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-strong);
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan-glow);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* ── Footer ── */
+.settings-footer {
+    padding: var(--sp-300) var(--sp-400);
+    background: var(--bg-surface-hover);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: flex-end;
 }

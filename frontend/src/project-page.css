@@ -1,151 +1,223 @@
 /* ============================================================
-   project-page.css — Projects (TaskHive)
+   project-page.css — Projects List (TaskHive)
+   Dark Mode Project Cards with Neon Illuminations
    ============================================================ */
 
-/* ---- Page Wrapper ---- */
-.projects {
-    position: absolute;
-    top: 0;
-    left: var(--sidebar-width);
-    right: 0;
-    min-height: 100vh;
-    background-color: var(--n20);
+.projects-page {
+    animation: fadeIn 0.4s var(--ease-out);
 }
 
-/* ---- Header Bar ---- */
-.projects::before {
-    content: '🐝 TaskHive  ›  Projects';
-    display: flex;
-    align-items: center;
-    height: var(--topbar-height);
-    padding: 0 var(--sp-500);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--n60);
-    background: var(--n0);
-    border-bottom: 1px solid var(--n30);
-    letter-spacing: 0.01em;
-    box-shadow: var(--shadow-xs);
+/* ── Header Button ── */
+.header-btn {
+    height: 40px;
+    padding: 0 var(--sp-300);
 }
 
-/* ---- Page Title ---- */
-.projects h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--n90);
-    margin-top: calc(var(--topbar-height) + var(--sp-400));
-    padding: 0 var(--sp-500);
-    margin-bottom: var(--sp-150);
-}
-
-/* ---- Create Button ---- */
-.projects > button {
-    display: inline-flex;
-    align-items: center;
-    margin: 0 var(--sp-500) var(--sp-400);
-    height: 32px;
-    padding: 0 var(--sp-200);
-    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
-    color: var(--n0);
-    font-weight: 500;
-    font-size: 14px;
-    border-radius: var(--radius-sm);
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(80, 70, 229, 0.3);
-    transition: opacity 0.15s ease, transform 0.1s ease;
-}
-
-.projects > button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* ---- Project Grid ---- */
-.project-list {
+/* ── Project Grid ── */
+.project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: var(--sp-300);
-    padding: 0 var(--sp-500) var(--sp-500);
 }
 
-/* ---- Project Card ---- */
+/* ── Project Card ── */
 .project-card {
-    background-color: var(--n0);
-    border: 1px solid var(--n30);
-    border-radius: var(--radius-md);
-    padding: var(--sp-300) var(--sp-300) var(--sp-300) calc(var(--sp-300) + 6px);
-    box-shadow: var(--shadow-xs);
-    transition: box-shadow 0.15s ease, transform 0.12s ease;
-    min-height: 140px;
-    position: relative;
-    overflow: hidden;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-300);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    animation: slideUpFade 0.5s var(--ease-out) both;
 }
 
-/* Accent border */
+/* Stagger Entrance */
+.project-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.project-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.project-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.project-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.project-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.project-card:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+/* Left Accent Glowing Line */
 .project-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 5px;
-    background: linear-gradient(180deg, var(--brand-400), var(--brand-600));
+    width: 4px;
+    background: var(--border-strong);
+    transition: all var(--transition-fast);
 }
 
 /* Hover Effect */
 .project-card:hover {
+    transform: translateY(-4px);
+    background-color: var(--bg-surface-hover);
+    border-color: var(--border-strong);
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
 }
 
-/* Project Name */
-.project-card h3 {
-    font-size: 16px;
+.project-card:hover::before {
+    background: var(--neon-cyan);
+    box-shadow: 2px 0 12px var(--neon-cyan-glow);
+}
+
+/* ── Card Header ── */
+.project-header {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-150);
+    margin-bottom: var(--sp-200);
+}
+
+.project-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-app);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon-cyan);
+}
+
+.project-card:hover .project-icon {
+    border-color: rgba(34, 211, 238, 0.3);
+    color: var(--neon-cyan);
+    box-shadow: inset 0 0 10px rgba(34, 211, 238, 0.1);
+}
+
+.project-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+/* ── Meta Info ── */
+.project-meta {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--sp-300);
+}
+
+.meta-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+}
+
+.meta-value {
+    font-size: 14px;
     font-weight: 600;
-    color: var(--n90);
+    color: var(--text-muted);
+}
+
+/* ── Progress Bar ── */
+.progress-container {
+    margin-bottom: var(--sp-300);
+    margin-top: auto;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
     margin-bottom: var(--sp-100);
 }
 
-/* Meta Info */
-.project-meta {
-    font-size: 13px;
-    color: var(--n60);
-    margin-bottom: var(--sp-200);
-}
-
-/* Progress Bar */
-.progress-bar {
+.progress-track {
     height: 6px;
-    background: var(--n30);
-    border-radius: 4px;
+    background: var(--bg-app);
+    border-radius: var(--radius-pill);
     overflow: hidden;
-    margin-bottom: var(--sp-200);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .progress-fill {
     height: 100%;
-    width: 60%;
-    background: linear-gradient(135deg, var(--brand-400), var(--brand-600));
+    background: linear-gradient(90deg, var(--neon-cyan), var(--brand-primary));
+    border-radius: var(--radius-pill);
+    box-shadow: 0 0 8px var(--neon-cyan-glow);
+    position: relative;
 }
 
-/* Action Buttons */
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 2s infinite linear;
+}
+
+/* ── Action Buttons ── */
 .project-actions {
     display: flex;
     gap: var(--sp-100);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--sp-200);
 }
 
 .project-actions button {
-    border: none;
-    background: var(--n40);
-    padding: 4px 8px;
-    border-radius: var(--radius-sm);
-    font-size: 12px;
-    cursor: pointer;
+    flex: 1;
+    height: 34px;
+    padding: 0;
+    font-size: 13px;
+    background: var(--bg-app);
+    border: 1px solid var(--border-subtle);
 }
 
-.project-actions button:hover {
-    background: var(--n50);
+/* Sub-button hover colors */
+.action-view:hover {
+    background: rgba(129, 140, 248, 0.1);
+    border-color: rgba(129, 140, 248, 0.3);
+    color: var(--brand-primary);
+}
+
+.action-add:hover {
+    background: var(--status-success-bg);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--status-success);
+}
+
+.action-delete:hover {
+    background: var(--status-danger-bg);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: var(--status-danger);
+}
+
+.project-actions button svg {
+    margin-right: 4px;
 }

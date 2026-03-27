@@ -1,86 +1,188 @@
-/* Main container */
+/* ============================================================
+   projectdetails.css — Project Details (TaskHive)
+   Dark Mode Kanban-style Task Cards
+   ============================================================ */
+
 .project-details {
-    padding: 30px;
-    background-color: #f5f7fa;
-    min-height: 100vh;
+    animation: fadeIn 0.4s var(--ease-out);
 }
 
-/* Heading */
-.project-details h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
-}
-
-/* Task list grid */
-.task-list {
+/* ── Task Grid ── */
+.task-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--sp-300);
 }
 
-/* Card */
-.task-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover effect */
-.task-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-
-/* Title */
-.task-card h3 {
-    margin-bottom: 10px;
-    color: #222;
-}
-
-/* Text */
-.task-card p {
-    margin: 5px 0;
-    color: #555;
-    font-size: 14px;
-}
-
-/* Buttons container */
-.task-actions {
-    margin-top: 15px;
+/* ── Detail Card (Kanban Style) ── */
+.detail-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-300);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
     display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    animation: scaleIn 0.3s var(--ease-out) both;
+}
+
+/* Staggered entrance */
+.detail-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.detail-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.detail-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.detail-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+/* Subtle accent border on the top */
+.detail-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--brand-primary);
+    opacity: 0.5;
+    transition: opacity var(--transition-fast);
+}
+
+/* Hover Effect */
+.detail-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-strong);
+}
+
+.detail-card:hover::after {
+    opacity: 1;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan-glow);
+}
+
+/* ── Header ── */
+.detail-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-150);
+    margin-bottom: var(--sp-200);
+}
+
+.card-icon {
+    color: var(--brand-primary);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.detail-card:hover .card-icon {
+    color: var(--neon-cyan);
+}
+
+.detail-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ── Meta Rows ── */
+.detail-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-150);
+    margin-bottom: var(--sp-300);
+    padding: var(--sp-200);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+}
+
+.meta-row {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
-/* Buttons */
-.task-actions button {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+.meta-key {
     font-size: 13px;
-    transition: 0.2s;
+    font-weight: 600;
+    color: var(--text-muted);
 }
 
-/* Individual button colors */
-.task-actions button:nth-child(1) {
-    background-color: #3498db;
-    color: white;
+.meta-val {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.task-actions button:nth-child(2) {
-    background-color: #f39c12;
-    color: white;
+/* ── Status Text Colors ── */
+.status-text {
+    font-size: 13px;
+    font-weight: 600;
 }
 
-.task-actions button:nth-child(3) {
-    background-color: #e74c3c;
-    color: white;
+.status-text.done {
+    color: var(--status-success);
 }
 
-/* Hover effect */
-.task-actions button:hover {
-    opacity: 0.8;
+.status-text.in-progress {
+    color: var(--neon-cyan);
+}
+
+.status-text.todo {
+    color: var(--text-muted);
+}
+
+/* ── Icons ── */
+.status-icon.done {
+    color: var(--status-success);
+}
+
+.status-icon.in-progress {
+    color: var(--neon-cyan);
+}
+
+.status-icon.todo {
+    color: var(--text-dim);
+}
+
+/* ── Action Buttons ── */
+.detail-actions {
+    display: flex;
+    margin-top: auto;
+}
+
+.del-btn {
+    width: 100%;
+    height: 36px;
+    background: var(--bg-app);
+    border: 1px solid var(--border-subtle);
+    color: var(--status-danger);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.del-btn:hover {
+    background: var(--status-danger-bg);
+    border-color: rgba(239, 68, 68, 0.3);
+    box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.4);
 }

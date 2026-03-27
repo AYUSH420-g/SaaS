@@ -1,116 +1,121 @@
 /* ============================================================
    task-page.css — Task List (TaskHive)
+   Dark mode table with hover states and custom scroll
    ============================================================ */
 
-/* ---- Page Wrapper ---- */
-.tasks {
-    position: absolute;
-    top: 0;
-    left: var(--sidebar-width);
-    right: 0;
-    min-height: 100vh;
-    background-color: var(--n20);
+.tasks-page {
+    animation: fadeIn 0.4s var(--ease-out);
 }
 
-/* ---- TaskHive Page Header Bar ---- */
-.tasks::before {
-    content: '🐝 TaskHive  ›  Tasks';
-    display: flex;
-    align-items: center;
-    height: var(--topbar-height);
-    padding: 0 var(--sp-500);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--n60);
-    background: var(--n0);
-    border-bottom: 1px solid var(--n30);
-    letter-spacing: 0.01em;
-    box-shadow: var(--shadow-xs);
-}
-
-/* ---- Main Content ---- */
-.tasks h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--n90);
-    margin-bottom: var(--sp-300);
-}
-
-.tasks>h1,
-.tasks>button,
-.tasks>table {
-    margin-left: var(--sp-500);
-    margin-right: var(--sp-500);
-}
-
-.tasks>h1 {
-    margin-top: calc(var(--topbar-height) + var(--sp-400));
-}
-
-.tasks>button {
-    margin-bottom: var(--sp-300);
-    height: 32px;
-    padding: 0 var(--sp-200);
-    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
-    color: var(--n0);
-    font-weight: 500;
-    font-size: 14px;
-    border-radius: var(--radius-sm);
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(80, 70, 229, 0.3);
-    transition: opacity 0.15s ease, transform 0.1s ease;
-}
-
-.tasks>button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* ---- Issues Table ---- */
-table {
-    width: calc(100% - 80px);
-    margin-left: var(--sp-500);
-    border-collapse: collapse;
-    background-color: var(--n0);
-    border: 1px solid var(--n30);
-    border-radius: var(--radius-md);
+/* ── Table Container ── */
+.table-container {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
+    animation: slideUpFade 0.5s var(--ease-out) 0.1s both;
 }
 
-thead {
-    background-color: var(--n20);
-    border-bottom: 2px solid var(--n30);
-}
-
-thead th {
+/* ── Table Base ── */
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
     text-align: left;
-    padding: 10px var(--sp-200);
-    font-size: 11px;
+}
+
+/* ── Table Header ── */
+.task-table th {
+    padding: var(--sp-200) var(--sp-300);
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-strong);
+    font-size: 12px;
     font-weight: 700;
-    color: var(--n60);
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
 }
 
-tbody tr {
-    border-bottom: 1px solid var(--n20);
-    transition: background-color 0.1s;
-    cursor: pointer;
+.th-content {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-100);
 }
 
-tbody tr:last-child {
+.th-content svg {
+    color: var(--brand-primary);
+}
+
+/* ── Table Body ── */
+.task-table td {
+    padding: var(--sp-200) var(--sp-300);
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+    font-size: 14px;
+    transition: all var(--transition-fast);
+}
+
+.task-table tr:last-child td {
     border-bottom: none;
 }
 
-tbody tr:hover {
-    background-color: var(--brand-50);
+/* Row Hover */
+.task-table tbody tr {
+    cursor: pointer;
 }
 
-tbody td {
-    padding: 12px var(--sp-200);
-    font-size: 14px;
-    color: var(--n80);
-    vertical-align: middle;
+.task-table tbody tr:hover {
+    background-color: var(--bg-surface-hover);
+}
+
+.task-table tbody tr:hover td {
+    color: var(--text-main);
+}
+
+.task-table tbody tr:hover .task-title-text {
+    color: var(--neon-cyan);
+}
+
+/* ── Specific Cells ── */
+.title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-150);
+}
+
+.task-title-text {
+    font-weight: 600;
+    color: var(--text-main);
+    transition: color var(--transition-fast);
+}
+
+/* Icon Colors */
+.status-icon.done {
+    color: var(--status-success);
+}
+
+.status-icon.in-progress {
+    color: var(--neon-cyan);
+}
+
+.status-icon.todo {
+    color: var(--text-muted);
+}
+
+/* Status Text */
+.status-text {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.status-text.done {
+    color: var(--status-success);
+}
+
+.status-text.in-progress {
+    color: var(--neon-cyan);
+}
+
+.status-text.todo {
+    color: var(--text-muted);
 }

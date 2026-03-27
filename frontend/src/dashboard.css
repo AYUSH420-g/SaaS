@@ -1,69 +1,164 @@
+/* ============================================================
+   dashboard.css — Dashboard (TaskHive)
+   Neon accented dark mode stat cards
+   ============================================================ */
 
-.right-side {
-    margin-left: var(--sidebar-width);
-    min-height: 100vh;
-    padding: var(--sp-500);
-    padding-top: calc(var(--topbar-height) + var(--sp-400));
-    background-color: var(--n20);
+.dashboard-page {
+    animation: fadeIn 0.4s var(--ease-out);
 }
 
-.right-side h1 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: var(--sp-400);
+.page-subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 4px;
 }
 
-.cards {
-    display: flex;
+/* ── Stats Grid ── */
+.stats-grid {
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: var(--sp-300);
-    width: 100%;
 }
 
-.cards div {
-    background-color: var(--n0);
-    border: 1px solid var(--n30);
-    border-radius: var(--radius-md);
+/* ── Stat Card ── */
+.stat-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
     padding: var(--sp-300);
-    min-height: 120px;
-
     display: flex;
-    align-items: flex-end;
-
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--n70);
-
+    align-items: center;
+    gap: var(--sp-200);
     position: relative;
     overflow: hidden;
-
-    box-shadow: var(--shadow-xs);
-    transition: box-shadow 0.15s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+    animation: slideUpFade 0.5s var(--ease-out) both;
 }
 
-.cards div::before {
+/* Stagger Entrance */
+.stat-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.stat-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.stat-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.stat-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+/* ── Glowing Accent Tops ── */
+.stat-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    height: 2px;
+    transition: height var(--transition-fast);
+}
+
+.stat-card.cyan::before {
+    background: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan-glow);
+}
+
+.stat-card.green::before {
+    background: var(--status-success);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.stat-card.purple::before {
+    background: var(--neon-purple);
+    box-shadow: 0 0 10px var(--neon-purple-glow);
+}
+
+.stat-card.pink::before {
+    background: var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink-glow);
+}
+
+/* ── Hover Effects ── */
+.stat-card:hover {
+    transform: translateY(-4px);
+    background-color: var(--bg-surface-hover);
+    border-color: var(--border-strong);
+}
+
+.stat-card.cyan:hover {
+    box-shadow: 0 8px 24px var(--neon-cyan-glow);
+}
+
+.stat-card.green:hover {
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+}
+
+.stat-card.purple:hover {
+    box-shadow: 0 8px 24px var(--neon-purple-glow);
+}
+
+.stat-card.pink:hover {
+    box-shadow: 0 8px 24px var(--neon-pink-glow);
+}
+
+.stat-card:hover::before {
     height: 4px;
-    background: linear-gradient(90deg, var(--brand-500), var(--brand-400));
 }
 
-.cards div:nth-child(2)::before {
-    background: linear-gradient(90deg, var(--green-500), #34d399);
+/* ── Icon Wrappers ── */
+.stat-icon-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--bg-app);
+    border: 1px solid var(--border-subtle);
 }
 
-.cards div:nth-child(3)::before {
-    background: linear-gradient(90deg, var(--yellow-500), #fbbf24);
+.stat-card.cyan .stat-icon-wrapper {
+    color: var(--neon-cyan);
 }
 
-.cards div:nth-child(4)::before {
-    background: linear-gradient(90deg, var(--red-500), #f87171);
+.stat-card.green .stat-icon-wrapper {
+    color: var(--status-success);
 }
 
-.cards div:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+.stat-card.purple .stat-icon-wrapper {
+    color: var(--neon-purple);
+}
+
+.stat-card.pink .stat-icon-wrapper {
+    color: var(--neon-pink);
+}
+
+/* ── Info Container ── */
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1;
+    letter-spacing: -0.03em;
 }

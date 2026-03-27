@@ -1,97 +1,87 @@
-import axios from "axios";
-import "./add-single-task.css";
 import { useState } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
-function Ast() {
+import './add-single-task.css'; // Will share standard-form classes from create-project
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Type, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [priority, setPriority] = useState('Low');
-    const [status, setStatus] = useState('Todo');
-    const navigate=useNavigate();
-    const {id}=useParams();
+function Addsngltask() {
+    const [title, settitle] = useState('');
+    const [desc, setdesc] = useState('');
+    const [priority, setpriority] = useState('High');
+    const navigate = useNavigate();
+    const { id } = useParams();
 
-    const create_task=async (e)=>{
-            e.preventDefault();
-        try{
-            console.log(id);
-            const res=await axios.post("http://localhost:3003/task",
-                {
-                    title:title,
-                    description:description,
-                    priority:priority,
-                    status:status,
-                    project_id:id
-                }
-
-            )
-            navigate("/project-page");
-
-        }
-        catch(err)
-        {
+    const handlesubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res=await axios.post(`http://localhost:3003/createtask/${id}`, { title, desc, priority});
+            console.log(res);
+            navigate(`/projectdetails/${id}`);
+        } catch (err) {
             console.log(err);
         }
-    };
-
-
+    }
 
     return (
-        <div className="create-task">
-
-            <h1>Create Task</h1>
-
-            <form className="task-form" onSubmit={create_task}>
-
-                <div className="form-group">
-                    <label>Task Title</label>
-                    <input
-                        type="text"
-                        placeholder="Enter task title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
+        <div className="create-task-page">
+            <div className="page-header">
+                <div>
+                    <h1>Add New Task</h1>
+                    <p className="page-subtitle">Create a new task for this project</p>
                 </div>
+            </div>
 
-                <div className="form-group">
-                    <label>Description</label>
-                    <textarea
-                        placeholder="Enter description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
+            <div className="form-container glass-panel">
+                <form className="standard-form border-glow-on-focus" onSubmit={handlesubmit}>
 
-                <div className="form-group">
-                    <label>Priority</label>
-                    <select
-                        value={priority}
-                        onChange={(e) => setPriority(e.target.value)}
-                    >
-                        <option>Low</option>
-                        <option>Medium</option>
-                        <option>High</option>
-                    </select>
-                </div>
+                    <div className="input-wrapper">
+                        <label>Task Title</label>
+                        <div className="input-icon-group">
+                            <Type size={18} className="input-icon" />
+                            <input
+                                type="text"
+                                placeholder="e.g. Design Login Page"
+                                value={title}
+                                onChange={(e) => settitle(e.target.value)}
+                                required
+                            />
+                        </div>
+                    </div>
 
-                <div className="form-group">
-                    <label>Status</label>
-                    <select
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
-                    >
-                        <option>Todo</option>
-                        <option>In Progress</option>
-                        <option>Done</option>
-                    </select>
-                </div>
+                    <div className="input-row split-half">
+                        <div className="input-wrapper">
+                            <label>Priority Level</label>
+                            <div className="input-icon-group select-group">
+                                <AlertCircle size={18} className="input-icon" />
+                                <select value={priority} onChange={(e) => setpriority(e.target.value)}>
+                                    <option value="High">High Priority</option>
+                                    <option value="Medium">Medium Priority</option>
+                                    <option value="Low">Low Priority</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
-                <button type="submit" >Create Task</button>
+                    <div className="input-wrapper">
+                        <label>Task Description (Optional)</label>
+                        <div className="input-icon-group textarea-group">
+                            <FileText size={18} className="input-icon" />
+                            <textarea
+                                placeholder="Detailed instructions or context"
+                                value={desc}
+                                onChange={(e) => setdesc(e.target.value)}
+                            />
+                        </div>
+                    </div>
 
-            </form>
+                    <button type="submit" className="primary submit-btn">
+                        Create Task <CheckCircle2 size={18} />
+                    </button>
 
+                </form>
+            </div>
         </div>
     );
 }
 
-export default Ast;
+export default Addsngltask;

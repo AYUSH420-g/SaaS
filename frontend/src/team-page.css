@@ -1,82 +1,189 @@
 /* ============================================================
-   team-page.css — Team Members (TaskHive)
+   team-page.css — Team Directory (TaskHive)
+   Dark Mode Avatar Cards
    ============================================================ */
 
-/* ---- Page Wrapper ---- */
-.team {
+.team-page {
+    animation: fadeIn 0.4s var(--ease-out);
+}
+
+/* ── Grid Layout ── */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--sp-300);
+}
+
+/* ── Team Card Base ── */
+.team-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-400) var(--sp-300);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+    animation: slideUpFade 0.5s var(--ease-out) both;
+}
+
+/* Stagger Entrance */
+.team-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.team-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.team-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.team-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+/* Subtle top glow bar based on assigned color */
+.team-card::before {
+    content: '';
     position: absolute;
     top: 0;
-    left: var(--sidebar-width);
+    left: 0;
     right: 0;
-    min-height: 100vh;
-    background-color: var(--n20);
+    height: 3px;
+    background: var(--bg-surface-active);
+    transition: all var(--transition-fast);
 }
 
-/* ---- TaskHive Page Header Bar ---- */
-.team::before {
-    content: '🐝 TaskHive  ›  Team';
-    display: flex;
-    align-items: center;
-    height: var(--topbar-height);
-    padding: 0 var(--sp-500);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--n60);
-    background: var(--n0);
-    border-bottom: 1px solid var(--n30);
-    letter-spacing: 0.01em;
-    box-shadow: var(--shadow-xs);
-}
-
-.team h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--n90);
-    margin-top: calc(var(--topbar-height) + var(--sp-400));
-    padding: 0 var(--sp-500);
-    margin-bottom: var(--sp-300);
-}
-
-/* ---- Member Cards Wrapper ---- */
-.team {
-    display: block;
-}
-
-/* ---- Member Card ---- */
-.member {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-150);
-    background-color: var(--n0);
-    border: 1px solid var(--n30);
-    border-radius: var(--radius-md);
-    padding: var(--sp-200) var(--sp-300);
-    margin: 0 var(--sp-150) var(--sp-200) var(--sp-500);
-    box-shadow: var(--shadow-xs);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--n80);
-    transition: box-shadow 0.15s, transform 0.12s, border-color 0.12s;
-}
-
-.member:hover {
+.team-card:hover {
+    transform: translateY(-4px);
+    background-color: var(--bg-surface-hover);
+    border-color: var(--border-strong);
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-    border-color: var(--brand-300);
-    color: var(--brand-700);
 }
 
-/* ---- Avatar Circle via ::before ---- */
-.member::before {
-    content: '👤';
+/* Hover Top Glow Assignments */
+.team-card.cyan:hover::before {
+    background: var(--neon-cyan);
+    box-shadow: 0 0 12px var(--neon-cyan-glow);
+}
+
+.team-card.purple:hover::before {
+    background: var(--neon-purple);
+    box-shadow: 0 0 12px var(--neon-purple-glow);
+}
+
+.team-card.pink:hover::before {
+    background: var(--neon-pink);
+    box-shadow: 0 0 12px var(--neon-pink-glow);
+}
+
+.team-card.green:hover::before {
+    background: var(--status-success);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+/* ── Avatar Circle ── */
+.avatar-section {
+    position: relative;
+    margin-bottom: var(--sp-200);
+}
+
+.avatar-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--brand-400), var(--brand-700));
-    font-size: 16px;
-    flex-shrink: 0;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--bg-app);
+}
+
+/* Avatar Gradients */
+.team-card.cyan .avatar-circle {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--brand-primary));
+}
+
+.team-card.purple .avatar-circle {
+    background: linear-gradient(135deg, var(--neon-purple), #9333ea);
+}
+
+.team-card.pink .avatar-circle {
+    background: linear-gradient(135deg, var(--neon-pink), #e11d48);
+}
+
+.team-card.green .avatar-circle {
+    background: linear-gradient(135deg, var(--status-success), #047857);
+}
+
+/* ── Info & Role ── */
+.member-info {
+    margin-bottom: var(--sp-200);
+}
+
+.member-info h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 2px;
+}
+
+.member-role {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brand-primary);
+}
+
+/* ── Contact Link ── */
+.member-contact {
+    width: 100%;
+    padding-top: var(--sp-200);
+    border-top: 1px dashed var(--border-strong);
+    margin-bottom: var(--sp-200);
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+}
+
+.contact-link:hover {
+    color: var(--text-main);
+    text-shadow: none;
+}
+
+/* ── Status Indicator ── */
+.member-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dim);
+}
+
+.status-dot {
+    color: var(--border-strong);
+}
+
+.status-dot.active {
+    color: var(--status-success);
 }

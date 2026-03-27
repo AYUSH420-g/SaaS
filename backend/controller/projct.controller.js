@@ -3,9 +3,9 @@ import Project from "../models/project.model.js";
 const proj=async (req,res)=>{
 
     try{
-        const{name,description,owner,deadline}=req.body;
+        const{name,owner,desc}=req.body;
         const project=new Project({
-            name,description,owner,deadline
+            name,owner,desc
         });
         await project.save();
         res.status(201).json({ message: "Project created", project });
