@@ -7,6 +7,19 @@ import { Layers, Trash2, Clock, CheckCircle2, Circle, Flame, ArrowDown, Minus } 
 function Projectdetails() {
     const [d, setdata] = useState([]);
     const { id } = useParams();
+    const[flag,setflag]=useState(false);
+
+    const deletebtn=async(_id)=>{
+        try{
+            const res=await axios.delete(`http://localhost:3003/deletetask/${_id}`);
+            setflag(!flag);
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+
+    }
 
     useEffect(() => {
         const fetchdata = async () => {
@@ -18,7 +31,7 @@ function Projectdetails() {
             }
         }
         fetchdata();
-    }, [id]);
+    }, [id,flag]);
 
     const getStatusIcon = (status) => {
         switch (status?.toLowerCase()) {
@@ -71,7 +84,7 @@ function Projectdetails() {
                         </div>
 
                         <div className="detail-actions">
-                            <button className="del-btn">
+                            <button className="del-btn" onClick={()=>{deletebtn(task._id)}}>
                                 <Trash2 size={16} /> Delete Task
                             </button>
                         </div>

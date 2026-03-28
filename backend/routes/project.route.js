@@ -1,6 +1,6 @@
 import express from "express";
 import  { proj,dproj } from "../controller/projct.controller.js";
-import {v,g, dt,dp,gc} from "../controller/task.controller.js";
+import {v,g, dt,dp,gc,dltk} from "../controller/task.controller.js";
 const router=express.Router();
 
 router.post("/createproject",proj);
@@ -10,5 +10,6 @@ router.get("/gettask/:id",g);
 router.get("/displaytask",dt);
 router.delete("/deleteproj/:id",dp);
 router.get("/getcount",gc);
+router.delete("/deletetask/:id",dltk);
 
 export default router;

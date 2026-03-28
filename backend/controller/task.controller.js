@@ -86,4 +86,17 @@ const gc=async(req,res)=>{
     }
 
 };
-export {v,g,dt,dp,gc};
+const dltk=async(req,res)=>{
+
+    try{
+    const id=req.params.id;
+    const dt=await Task.findByIdAndDelete(id);
+    res.status(200).json({dt});
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+
+}
+export {v,g,dt,dp,gc,dltk};
