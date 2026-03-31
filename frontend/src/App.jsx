@@ -27,6 +27,7 @@ function App() {
         <Route path='/create-project' element={<CreateProject/>}/>
         <Route path='/projectdetails/:id' element={<Projectdetails/>}/>
         <Route path='/add-single-task/:id' element={<Ast/>}/>
+        
       </Route>
     </Routes>
   )

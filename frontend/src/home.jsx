@@ -18,7 +18,7 @@ function Home() {
         { path: "/dashboard", icon: <LayoutDashboard size={20} />, label: "Dashboard" },
         { path: "/project-page", icon: <FolderKanban size={20} />, label: "Projects" },
         { path: "/task-page", icon: <CheckSquare size={20} />, label: "Tasks" },
-        { path: "/team-page", icon: <Users size={20} />, label: "Team" },
+        { path: "/team-page", icon: <Users size={20} />, label: "People" },
         { path: "/setting", icon: <Settings size={20} />, label: "Settings" }
     ];
 
