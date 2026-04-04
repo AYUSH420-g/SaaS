@@ -10,6 +10,7 @@ import Dashboard from './dashboard';
 import CreateProject from './create-project';
 import Projectdetails from './projectdetails';
 import Ast from './add-single-task';
+import Notifications from './notifications';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path='/task-page' element={<Task/>}/>
         <Route path='/team-page' element={<Team/>}/>
         <Route path='/setting' element={<Setting/>}/>
+        <Route path='/notifications' element={<Notifications/>}/>
         <Route path='/create-project' element={<CreateProject/>}/>
         <Route path='/projectdetails/:id' element={<Projectdetails/>}/>
         <Route path='/add-single-task/:id' element={<Ast/>}/>

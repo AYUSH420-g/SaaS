@@ -5,6 +5,7 @@ import {
     FolderKanban,
     CheckSquare,
     Users,
+    Bell,
     Settings,
     LogOut,
     Hexagon
@@ -19,6 +20,7 @@ function Home() {
         { path: "/project-page", icon: <FolderKanban size={20} />, label: "Projects" },
         { path: "/task-page", icon: <CheckSquare size={20} />, label: "Tasks" },
         { path: "/team-page", icon: <Users size={20} />, label: "People" },
+        { path: "/notifications", icon: <Bell size={20} />, label: "Notifications" },
         { path: "/setting", icon: <Settings size={20} />, label: "Settings" }
     ];
 

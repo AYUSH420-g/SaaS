@@ -64,3 +64,92 @@
 .submit-btn:hover {
     opacity: 0.9;
 }
+
+/* ── Avatar Circle ── */
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--brand-primary));
+    box-shadow: 0 2px 10px var(--brand-glow);
+    flex-shrink: 0;
+}
+
+/* ── Add Friend Button ── */
+.add-friend-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    background: rgba(34, 211, 238, 0.1);
+    color: var(--neon-cyan);
+    border: 1px solid rgba(34, 211, 238, 0.25);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+.add-friend-btn:hover {
+    background: rgba(34, 211, 238, 0.2);
+    box-shadow: 0 4px 14px var(--neon-cyan-glow);
+    transform: translateY(-1px);
+}
+
+.add-friend-btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ── Team Card Layout Fix ── */
+.team-card {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-150);
+}
+
+/* ── Toast ── */
+.team-toast {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    z-index: 9999;
+    animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+.team-toast.success {
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.9), rgba(16, 185, 129, 0.9));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.team-toast.error {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.9), rgba(239, 68, 68, 0.9));
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

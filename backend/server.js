@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.route.js";
 import projectRoutes from "./routes/project.route.js";
+import friendRoutes from "./routes/friend.route.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/",projectRoutes);
 app.use("/auth", authRoutes);
+app.use("/friend", friendRoutes);
 
 const PORT = 3003;
 
