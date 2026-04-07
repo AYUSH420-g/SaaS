@@ -54,7 +54,6 @@ function Team() {
         return name?.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'U';
     };
 
-    // ✅ Send request using receiverId
     const sendFriendRequest = async (receiverId) => {
         try {
             setSendingTo(receiverId);

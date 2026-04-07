@@ -1,23 +1,31 @@
 import Task from "../models/task.model.js";
 import Project from "../models/project.model.js";
 
-const v=async(req,res)=>{
-
-    try{
+const v = async (req, res) => {
+    try {
         const project_id = req.params.id;
-        const {title,desc,priority}=req.body;
+
+        const { title, desc, priority, assignedTo } = req.body; // ✅ added
+
         if (!project_id) {
             return res.status(400).json({ message: "project_id is required" });
         }
-        const task=new Task({title,desc,priority,project_id});
-        
+
+        const task = new Task({
+            title,
+            desc,
+            priority,
+            assignedTo: Array.isArray(assignedTo) ? assignedTo : [], // ✅ safe
+            project_id
+        });
+
         await task.save();
+
         res.status(201).json({ message: "Task created", task });
 
-    }
-    catch(err)
-    {
+    } catch (err) {
         console.log(err);
+        res.status(500).json({ message: "Server error" });
     }
 };
 

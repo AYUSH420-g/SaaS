@@ -72,3 +72,52 @@
         align-self: flex-start;
     }
 }
+
+/* ── Multi Select Dropdown Styling ── */
+.input-icon-group select {
+    width: 100%;
+    padding: 10px 12px;
+    padding-left: 14px;
+    border-radius: 10px;
+    border: 1px solid #2a2f3a;
+    background-color: #1a1f2b;
+    color: #e2e8f0;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    min-height: 120px; /* important for multi select */
+}
+
+/* Hover */
+.input-icon-group select:hover {
+    border-color: #3b82f6;
+}
+
+/* Focus */
+.input-icon-group select:focus {
+    border-color: #22d3ee;
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.2);
+}
+
+/* Options inside dropdown */
+.input-icon-group select option {
+    background-color: #1a1f2b;
+    color: #e2e8f0;
+    padding: 8px;
+}
+
+/* Selected option */
+.input-icon-group select option:checked {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.input-icon-group select::-webkit-scrollbar {
+    width: 6px;
+}
+
+.input-icon-group select::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 10px;
+}

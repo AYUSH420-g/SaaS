@@ -1,5 +1,5 @@
 import express from "express";
-import  { proj,dproj,sd } from "../controller/projct.controller.js";
+import  { proj,dproj,sd,au,gm} from "../controller/projct.controller.js";
 import {v,g, dt,dp,gc,dltk} from "../controller/task.controller.js";
 const router=express.Router();
 
@@ -12,5 +12,7 @@ router.delete("/deleteproj/:id",dp);
 router.get("/getcount",gc);
 router.delete("/deletetask/:id",dltk);
 router.get("/search-data",sd);
+router.get("/all-users",au);
+router.get("/getmember/:id",gm);
 
 export default router;

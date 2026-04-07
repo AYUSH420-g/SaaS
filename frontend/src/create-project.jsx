@@ -1,20 +1,47 @@
-import { useState } from 'react';
+import { useState,useEffect} from 'react';
 import './create-project.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FolderPlus, User, AlignLeft, CheckCircle2 } from 'lucide-react';
+import { FolderPlus, User, CheckCircle2 } from 'lucide-react';
 
 function Createproj() {
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : null;
     const [name, setname] = useState('');
     const [desc, setdesc] = useState('');
-    const [owner, setowner] = useState('');
+    const [owner, setowner] = useState(user?.name || "");
+    const [members, setMembers] = useState([]);
+    const [selectedMembers, setSelectedMembers] = useState([]);
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+    const fetchUsers = async () => {
+        try {
+            
+
+            const res = await axios.get("http://localhost:3003/all-users",{
+                   params: {
+                    userId: user._id
+                }
+            });
+            setMembers(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    fetchUsers();
+}, []);
 
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
             const res = await axios.post("http://localhost:3003/createproject", 
-                { name, owner, desc });
+                {  name,
+                    owner:user._id,
+                    desc,
+                    members: selectedMembers });
             console.log(res);
             navigate("/project-page");
         } catch (err) {
@@ -53,18 +80,39 @@ function Createproj() {
                             <User size={18} className="input-icon" />
                             <input
                                 type="text"
-                                placeholder="e.g. John Doe"
                                 value={owner}
                                 onChange={(e) => setowner(e.target.value)}
-                                required
+                                readOnly
                             />
+                        </div>
+                    </div>
+
+
+
+                    <div className="input-wrapper">
+                        <label>Add Members</label>
+                        <div className="input-icon-group">
+                            {/* <User size={18} className="input-icon" /> */}
+                            <select
+                                multiple
+                                value={selectedMembers}
+                                onChange={(e) => {
+                                    const values = Array.from(e.target.selectedOptions, option => option.value);
+                                    setSelectedMembers(values);
+                                }}>
+                                {members.map((m) => (
+                                    <option key={m._id} value={m._id}>
+                                        {m.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
 
                     <div className="input-wrapper">
                         <label>Description (Optional)</label>
                         <div className="input-icon-group textarea-group">
-                            <AlignLeft size={18} className="input-icon" />
+                            
                             <textarea
                                 placeholder="What is this project about?"
                                 value={desc}
