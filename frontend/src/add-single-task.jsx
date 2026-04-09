@@ -42,7 +42,7 @@ function Addsngltask() {
                     title,
                     desc,
                     priority,
-                    members: selectedMembers.map(m => m._id) // ✅ send ids
+                    assignedTo: selectedMembers.map(m => m._id)
                 }
             );
 

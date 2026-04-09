@@ -5,7 +5,7 @@ const v = async (req, res) => {
     try {
         const project_id = req.params.id;
 
-        const { title, desc, priority, assignedTo } = req.body; // ✅ added
+        const { title, desc, priority, assignedTo } = req.body; 
 
         if (!project_id) {
             return res.status(400).json({ message: "project_id is required" });
@@ -15,8 +15,8 @@ const v = async (req, res) => {
             title,
             desc,
             priority,
-            assignedTo: Array.isArray(assignedTo) ? assignedTo : [], // ✅ safe
-            project_id
+            project_id,
+            assignedTo: Array.isArray(assignedTo) ? assignedTo : [], 
         });
 
         await task.save();
