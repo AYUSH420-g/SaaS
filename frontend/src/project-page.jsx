@@ -64,15 +64,7 @@ function Project() {
                             <span className="meta-value">{p.owner}</span>
                         </div>
 
-                        <div className="progress-container">
-                            <div className="progress-labels">
-                                <span>Progress</span>
-                                <span>60%</span> {/* Placeholder */}
-                            </div>
-                            <div className="progress-track">
-                                <div className="progress-fill" style={{ width: '60%' }}></div>
-                            </div>
-                        </div>
+                       
 
                         <div className="project-actions">
                             <button className="action-view" onClick={() => viewbutton(p._id)}>

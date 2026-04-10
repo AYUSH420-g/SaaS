@@ -50,8 +50,9 @@ const g=async(req,res)=>{
 
 const dt=async(req,res)=>{
 
+    const id=req.params.id;
     try{
-        const task=await Task.find();
+        const task=await Task.find({assignedTo:id});
         res.status(200).json(task);
     }
     catch(err)
@@ -81,10 +82,11 @@ const dp = async (req, res) => {
 
 const gc=async(req,res)=>{
 
+    const id=req.params.id;
     try{
-        const total = await Task.countDocuments();
-        const pending = await Task.countDocuments({status:"Todo"});
-        const complete = await Task.countDocuments({status:"Done"});
+        const total = await Task.countDocuments({assignedTo:id});
+        const pending = await Task.countDocuments({status:"Todo",assignedTo:id});
+        const complete = await Task.countDocuments({status:"Done",assignedTo:id});
         //   const overdue = await Task.countDocuments({status:"Todo"});
         res.status(200).json({total,pending,complete});
     }

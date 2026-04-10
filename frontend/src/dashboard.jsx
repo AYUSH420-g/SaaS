@@ -7,6 +7,8 @@ import axios from 'axios';
 
 function Dashboard() {
 
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : null;
     const[totaltask,settotaltask]=useState("");
     const[pendingtask,setpending]=useState("");
     const[completedtask,setcomplete]=useState("");
@@ -15,7 +17,7 @@ function Dashboard() {
 
         const fun=async()=>{
 
-            const res=await axios.get(`http://localhost:3003/getcount`);
+            const res=await axios.get(`http://localhost:3003/getcount/${user._id}`);
             console.log(res.data);
             // console.log(res.data.pending);
             

@@ -4,9 +4,11 @@ import axios from 'axios';
 import { AlignLeft, CheckCircle2, Circle, Clock, Flame, Minus, ArrowDown, ArrowUp } from 'lucide-react';
 
 function Task() {
+
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : null;
     const [task, settask] = useState([]);
 
-    // Adjusted to match common priority strings (assuming High/Medium/Low based on original CSS)
     const priorityOrder = {
         High: 1,
         Medium: 2,
@@ -20,7 +22,8 @@ function Task() {
     useEffect(() => {
         const fun = async () => {
             try {
-                const res = await axios.get("http://localhost:3003/displaytask");
+                
+                const res = await axios.get(`http://localhost:3003/displaytask/${user._id}`);
                 settask(res.data);
             } catch (err) {
                 console.log(err);
