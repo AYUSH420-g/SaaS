@@ -113,6 +113,8 @@
 /* ── Team Card Layout Fix ── */
 .team-card {
     display: flex;
+    margin-top: 9px;
+    margin-bottom: 9px;
     align-items: center;
     gap: var(--sp-150);
 }

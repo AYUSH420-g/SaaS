@@ -10,14 +10,16 @@ function Signup() {
     const [pass, setpass] = useState('');
     const navigate = useNavigate();
 
+    const [error, setError] = useState(null);
+
     const subsign = async (e) => {
         e.preventDefault();
+        setError(null);
         try {
             const res = await axios.post("http://localhost:3003/auth/signup", { name, email, pass });
-            console.log(res.data);
             navigate("/login");
         } catch (err) {
-            console.log(err);
+            setError(err.response?.data?.message || err.message || "An error occurred");
         }
     }
 
@@ -34,7 +36,7 @@ function Signup() {
                 </div>
 
                 <form className="auth-form glass-panel" onSubmit={subsign}>
-
+                    {error && <div className="auth-error" style={{color: '#ff4d4d', padding: '10px', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: '8px', marginBottom: '15px', textAlign: 'center'}}>{error}</div>}
                     <div className="input-wrapper">
                         <label>Full Name</label>
                         <div className="input-icon-group">

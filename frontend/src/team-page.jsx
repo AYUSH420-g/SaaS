@@ -13,24 +13,34 @@ function Team() {
 
     const navigate = useNavigate();
 
-    // ✅ Safe user parsing
     const storedUser = localStorage.getItem("user");
     const user = storedUser ? JSON.parse(storedUser) : null;
 
-    // ✅ Redirect if not logged in
     useEffect(() => {
         if (!user?._id) {
             navigate("/");
         }
     }, []);
 
-    // ✅ Debounced search
     useEffect(() => {
         const delay = setTimeout(() => {
             const fetchTeam = async () => {
                 try {
                     if (!input.trim()) {
-                        setMemdata([]);
+                        if (user?._id) {
+                            const res = await axios.get("http://localhost:3003/friend/friends", {
+                                params: { userId: user._id }
+                            });
+                            const friendsData = res.data.map(req => {
+                                if (req.senderId && req.senderId._id === user._id) {
+                                    return req.receiverId;
+                                }
+                                return req.senderId;
+                            }).filter(Boolean); // Filter out any nulls just in case
+                            setMemdata(friendsData);
+                        } else {
+                            setMemdata([]);
+                        }
                         return;
                     }
 
@@ -48,7 +58,7 @@ function Team() {
         }, 400);
 
         return () => clearTimeout(delay);
-    }, [input]);
+    }, [input, user?._id]);
 
     const getInitials = (name) => {
         return name?.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'U';
@@ -117,7 +127,7 @@ function Team() {
                                 </span>
                             </div>
 
-                            {!isOwnCard && (
+                            {!isOwnCard && input.trim() !== "" && (
                                 <button
                                     className="add-friend-btn"
                                     onClick={() => sendFriendRequest(member._id)}

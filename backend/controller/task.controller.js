@@ -29,22 +29,35 @@ const v = async (req, res) => {
     }
 };
 
-const g=async(req,res)=>{
-    try{
+const g = async (req, res) => {
+    try {
         const id = req.params.id;
-        // console.log(id);
-        const data = await Task.find({project_id: id});
-        console.log(data);
+        const data = await Task.find({ project_id: id }).populate('project_id', 'name owner');
+        
         if (!data) {
             return res.status(404).json({
                 message: "Data not found"
             });
         }
+
+        const project = await Project.findById(id);
+        if (project) {
+            for (let task of data) {
+                const validMembers = task.assignedTo.filter(memberId => 
+                    project.members.some(pMemberId => pMemberId.toString() === memberId.toString())
+                );
+
+                if (validMembers.length !== task.assignedTo.length) {
+                    task.assignedTo = validMembers;
+                    await task.save();
+                }
+            }
+        }
+
         res.status(200).json(data);
-    }
-    catch(err)
-    {
+    } catch (err) {
         console.log(err);
+        res.status(500).json({ message: "Server error" });
     }
 }
 
@@ -52,7 +65,7 @@ const dt=async(req,res)=>{
 
     const id=req.params.id;
     try{
-        const task=await Task.find({assignedTo:id});
+        const task=await Task.find({assignedTo:id}).populate('project_id', 'name owner members');
         res.status(200).json(task);
     }
     catch(err)
@@ -62,6 +75,39 @@ const dt=async(req,res)=>{
     }
 
 }
+
+const addMemberTask = async (req, res) => {
+    try {
+        const { taskId, memberId } = req.body;
+        const task = await Task.findById(taskId);
+        if (!task) return res.status(404).json({ message: "Task not found" });
+
+        if (!task.assignedTo.includes(memberId)) {
+            task.assignedTo.push(memberId);
+            await task.save();
+        }
+        res.status(200).json({ message: "Member added", task });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+const removeMemberTask = async (req, res) => {
+    try {
+        const { taskId, memberId } = req.body;
+        const task = await Task.findById(taskId);
+        if (!task) return res.status(404).json({ message: "Task not found" });
+
+        task.assignedTo = task.assignedTo.filter(id => id.toString() !== memberId);
+        await task.save();
+        
+        res.status(200).json({ message: "Member removed", task });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
 
 const dp = async (req, res) => {
     // console.log("BACK IN");
@@ -109,4 +155,4 @@ const dltk=async(req,res)=>{
     }
 
 }
-export {v,g,dt,dp,gc,dltk};
+export {v,g,dt,dp,gc,dltk, addMemberTask, removeMemberTask};

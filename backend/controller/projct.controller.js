@@ -1,6 +1,7 @@
 import Project from "../models/project.model.js";
 import User from "../models/user.model.js";
 import Request from "../models/req.model.js";
+import Task from "../models/task.model.js";
 
 const proj=async (req,res)=>{
 
@@ -106,4 +107,43 @@ const gm = async (req, res) => {
     }
 };
 
-export {proj,dproj,sd,au,gm};
+const addMember = async (req, res) => {
+    try {
+        const { projectId, memberId } = req.body;
+        const project = await Project.findById(projectId);
+        if (!project) return res.status(404).json({ message: "Project not found" });
+
+        if (!project.members.includes(memberId)) {
+            project.members.push(memberId);
+            await project.save();
+        }
+        res.status(200).json({ message: "Member added", project });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+const removeMember = async (req, res) => {
+    try {
+        const { projectId, memberId } = req.body;
+        const project = await Project.findById(projectId);
+        if (!project) return res.status(404).json({ message: "Project not found" });
+
+        project.members = project.members.filter(id => id.toString() !== memberId);
+        await project.save();
+        
+        // Remove member from all assigned tasks within this project
+        await Task.updateMany(
+            { project_id: projectId },
+            { $pull: { assignedTo: memberId } }
+        );
+        
+        res.status(200).json({ message: "Member removed", project });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+export { proj, dproj, sd, au, gm, addMember, removeMember };

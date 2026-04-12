@@ -221,3 +221,171 @@
 .project-actions button svg {
     margin-right: 4px;
 }
+
+.action-members:hover {
+    background: rgba(234, 179, 8, 0.1); /* Yellow/amber tint */
+    border-color: rgba(234, 179, 8, 0.3);
+    color: #eab308;
+}
+
+/* ── Modal Overlay ── */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* ── Members Modal ── */
+.members-modal {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 480px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: slideUpFade 0.3s ease-out;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sp-300);
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-app);
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    margin: 0;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+}
+
+.members-list {
+    padding: var(--sp-300);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-200);
+}
+
+.no-friends {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: var(--sp-400) 0;
+}
+
+.member-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sp-200);
+    background: var(--bg-app);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s;
+}
+
+.member-item:hover {
+    border-color: var(--border-medium);
+}
+
+.member-info {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-200);
+}
+
+.avatar-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--brand-primary));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.member-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.member-email {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.toggle-member-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.toggle-member-btn.add {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--status-success);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.toggle-member-btn.add:hover {
+    background: var(--status-success);
+    color: #fff;
+}
+
+.toggle-member-btn.remove {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--status-danger);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.toggle-member-btn.remove:hover {
+    background: var(--status-danger);
+    color: #fff;
+}

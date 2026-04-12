@@ -9,15 +9,17 @@ function Login() {
     const [pass, setpass] = useState('');
     const navigate = useNavigate();
 
+    const [error, setError] = useState(null);
+
     const logsub = async (e) => {
         e.preventDefault();
+        setError(null);
         try {
             const res = await axios.post("http://localhost:3003/auth/login", { email, pass });
-            console.log(res.data);
             localStorage.setItem("user", JSON.stringify(res.data.user));
             navigate("/dashboard");
         } catch (err) {
-            console.log(err);
+            setError(err.response?.data?.message || err.message || "An error occurred");
         }
     }
 
@@ -34,6 +36,7 @@ function Login() {
                 </div>
 
                 <form className="auth-form glass-panel" onSubmit={logsub}>
+                    {error && <div className="auth-error" style={{color: '#ff4d4d', padding: '10px', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: '8px', marginBottom: '15px', textAlign: 'center'}}>{error}</div>}
                     <div className="input-wrapper">
                         <label>Email Address</label>
                         <div className="input-icon-group">

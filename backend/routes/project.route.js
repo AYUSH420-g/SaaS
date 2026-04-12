@@ -1,6 +1,6 @@
 import express from "express";
-import  { proj,dproj,sd,au,gm} from "../controller/projct.controller.js";
-import {v,g, dt,dp,gc,dltk} from "../controller/task.controller.js";
+import  { proj,dproj,sd,au,gm,addMember,removeMember} from "../controller/projct.controller.js";
+import {v,g, dt,dp,gc,dltk, addMemberTask, removeMemberTask} from "../controller/task.controller.js";
 const router=express.Router();
 
 router.post("/createproject",proj);
@@ -14,5 +14,9 @@ router.delete("/deletetask/:id",dltk);
 router.get("/search-data",sd);
 router.get("/all-users",au);
 router.get("/getmember/:id",gm);
+router.post("/addmember", addMember);
+router.post("/removemember", removeMember);
+router.post("/task/addmember", addMemberTask);
+router.post("/task/removemember", removeMemberTask);
 
 export default router;
