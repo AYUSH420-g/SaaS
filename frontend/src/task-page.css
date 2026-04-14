@@ -7,6 +7,56 @@
     animation: fadeIn 0.4s var(--ease-out);
 }
 
+/* ── Filter UI ── */
+.filter-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.filter-select {
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 32px;
+    min-width: 160px;
+}
+
+.filter-select:hover {
+    border-color: var(--border-medium);
+    background-color: var(--bg-surface-hover);
+}
+
+.filter-select:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 0 1px var(--neon-cyan-glow);
+}
+
+.filter-select optgroup {
+    background-color: var(--bg-surface);
+    color: var(--text-dim);
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.filter-select option {
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    padding: 10px;
+}
+
 /* ── Table Container ── */
 .table-container {
     background-color: var(--bg-surface);
@@ -118,4 +168,49 @@
 
 .status-text.todo {
     color: var(--text-muted);
+}
+
+/* ── Project Badge ── */
+.project-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: rgba(129, 140, 248, 0.1);
+    border: 1px solid rgba(129, 140, 248, 0.2);
+    border-radius: var(--radius-sm);
+    color: var(--brand-primary);
+    font-size: 12px;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.task-table tr:hover .project-badge {
+    background: rgba(129, 140, 248, 0.2);
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 10px rgba(129, 140, 248, 0.1);
+}
+/* ── Deadline Text ── */
+.deadline-text {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.task-table tr:hover .deadline-text {
+    color: var(--text-main);
+}
+
+/* ── Created On Text ── */
+.created-text {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.task-table tr:hover .created-text {
+    color: var(--text-main);
 }

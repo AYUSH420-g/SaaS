@@ -133,16 +133,16 @@ function Projectdetails() {
                         </div>
 
                         <div className="detail-actions" style={{ display: "flex", gap: "8px", flexDirection: "row", marginTop: "16px" }}>
+                            <button className="action-members" 
+                                style={{ flex: 1, padding: "8px 12px", fontSize: "13px", background: "transparent", border: "1px solid var(--border-medium)", borderRadius: "6px", color: "var(--text-main)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }} 
+                                onClick={() => openTaskMembersModal(task)}>
+                                <Users size={16} /> Members
+                            </button>
                             {task.project_id?.owner === user?._id && (
-                                <button className="action-members" 
-                                    style={{ flex: 1, padding: "8px 12px", fontSize: "13px", background: "transparent", border: "1px solid var(--border-medium)", borderRadius: "6px", color: "var(--text-main)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }} 
-                                    onClick={() => openTaskMembersModal(task)}>
-                                    <Users size={16} /> Members
+                                <button className="del-btn" style={{ flex: 1 }} onClick={()=>{deletebtn(task._id)}}>
+                                    <Trash2 size={16} /> Delete
                                 </button>
                             )}
-                            <button className="del-btn" style={{ flex: 1 }} onClick={()=>{deletebtn(task._id)}}>
-                                <Trash2 size={16} /> Delete
-                            </button>
                         </div>
                     </div>
                 ))}
@@ -158,10 +158,19 @@ function Projectdetails() {
                             </button>
                         </div>
                         <div className="members-list" style={{ padding: "16px", overflowY: "auto", display: "flex", flexDirection: "column", gap: "12px", maxHeight: "60vh" }}>
-                            {projectMembers.length === 0 ? (
-                                <p className="no-friends" style={{ textAlign: "center", color: "var(--text-muted)", fontSize: "14px", padding: "24px 0" }}>No project members available.</p>
-                            ) : (
-                                projectMembers.map(f => {
+                            {(() => {
+                                const isProjectOwner = d.find(task => task._id === selectedTask)?.project_id?.owner === user?._id;
+                                const filteredMembers = isProjectOwner 
+                                    ? projectMembers 
+                                    : projectMembers.filter(f => taskMembers.includes(f._id));
+
+                                if (filteredMembers.length === 0) {
+                                    return <p className="no-friends" style={{ textAlign: "center", color: "var(--text-muted)", fontSize: "14px", padding: "24px 0" }}>
+                                        {isProjectOwner ? "No project members available." : "No members assigned to this task."}
+                                    </p>;
+                                }
+
+                                return filteredMembers.map(f => {
                                     const isMember = taskMembers.includes(f._id);
                                     return (
                                         <div key={f._id} className="member-item" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px", background: "var(--bg-app)", border: "1px solid var(--border-subtle)", borderRadius: "6px" }}>
@@ -174,17 +183,19 @@ function Projectdetails() {
                                                     <span className="member-email" style={{ fontSize: "12px", color: "var(--text-muted)" }}>{f.email}</span>
                                                 </div>
                                             </div>
-                                            <button 
-                                                className={`toggle-member-btn ${isMember ? 'remove' : 'add'}`}
-                                                style={{ padding: "6px 12px", fontSize: "12px", fontWeight: "600", borderRadius: "4px", cursor: "pointer", border: "1px solid transparent", background: isMember ? "rgba(239, 68, 68, 0.1)" : "rgba(16, 185, 129, 0.1)", color: isMember ? "var(--status-danger)" : "var(--status-success)", borderColor: isMember ? "rgba(239, 68, 68, 0.3)" : "rgba(16, 185, 129, 0.3)" }}
-                                                onClick={() => toggleTaskMember(f._id)}
-                                            >
-                                                {isMember ? 'Remove' : 'Add to Task'}
-                                            </button>
+                                            {isProjectOwner && (
+                                                <button 
+                                                    className={`toggle-member-btn ${isMember ? 'remove' : 'add'}`}
+                                                    style={{ padding: "6px 12px", fontSize: "12px", fontWeight: "600", borderRadius: "4px", cursor: "pointer", border: "1px solid transparent", background: isMember ? "rgba(239, 68, 68, 0.1)" : "rgba(16, 185, 129, 0.1)", color: isMember ? "var(--status-danger)" : "var(--status-success)", borderColor: isMember ? "rgba(239, 68, 68, 0.3)" : "rgba(16, 185, 129, 0.3)" }}
+                                                    onClick={() => toggleTaskMember(f._id)}
+                                                >
+                                                    {isMember ? 'Remove' : 'Add to Task'}
+                                                </button>
+                                            )}
                                         </div>
-                                    )
-                                })
-                            )}
+                                    );
+                                });
+                            })()}
                         </div>
                     </div>
                 </div>

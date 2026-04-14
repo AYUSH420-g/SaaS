@@ -2,7 +2,7 @@ import { useState,useEffect} from 'react';
 import './create-project.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FolderPlus, User, CheckCircle2 } from 'lucide-react';
+import { FolderPlus, User, CheckCircle2, Calendar } from 'lucide-react';
 
 function Createproj() {
     const storedUser = localStorage.getItem("user");
@@ -12,6 +12,7 @@ function Createproj() {
     const [owner, setowner] = useState(user?.name || "");
     const [members, setMembers] = useState([]);
     const [selectedMembers, setSelectedMembers] = useState([]);
+    const [deadline, setDeadline] = useState('');
     const navigate = useNavigate();
 
 
@@ -41,6 +42,7 @@ function Createproj() {
                 {  name,
                     owner:user._id,
                     desc,
+                    deadline,
                     members: selectedMembers });
             console.log(res);
             navigate("/project-page");
@@ -87,7 +89,18 @@ function Createproj() {
                         </div>
                     </div>
 
-
+                    <div className="input-wrapper">
+                        <label>Deadline</label>
+                        <div className="input-icon-group">
+                            <Calendar size={18} className="input-icon" />
+                            <input
+                                type="date"
+                                value={deadline}
+                                onChange={(e) => setDeadline(e.target.value)}
+                                required
+                            />
+                        </div>
+                    </div>
 
                     <div className="input-wrapper">
                         <label>Add Members</label>

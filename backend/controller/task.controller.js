@@ -5,7 +5,7 @@ const v = async (req, res) => {
     try {
         const project_id = req.params.id;
 
-        const { title, desc, priority, assignedTo } = req.body; 
+        const { title, desc, priority, assignedTo, deadline } = req.body; 
 
         if (!project_id) {
             return res.status(400).json({ message: "project_id is required" });
@@ -16,6 +16,7 @@ const v = async (req, res) => {
             desc,
             priority,
             project_id,
+            deadline,
             assignedTo: Array.isArray(assignedTo) ? assignedTo : [], 
         });
 
@@ -61,19 +62,23 @@ const g = async (req, res) => {
     }
 }
 
-const dt=async(req,res)=>{
-
-    const id=req.params.id;
-    try{
-        const task=await Task.find({assignedTo:id}).populate('project_id', 'name owner members');
-        res.status(200).json(task);
-    }
-    catch(err)
-    {
+const dt = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const userProjects = await Project.find({ owner: id }).distinct('_id');
         
-        console.log(err);
+        const tasks = await Task.find({
+            $or: [
+                { assignedTo: id },
+                { project_id: { $in: userProjects } }
+            ]
+        }).populate('project_id', 'name owner members');
+        
+        res.status(200).json(tasks);
+    } catch (err) {
+        console.log("Error in displaytask:", err);
+        res.status(500).json({ message: "Server error" });
     }
-
 }
 
 const addMemberTask = async (req, res) => {

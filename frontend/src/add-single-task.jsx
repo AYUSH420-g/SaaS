@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './add-single-task.css';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Type, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Type, AlertCircle, CheckCircle2, Calendar } from 'lucide-react';
 
 function Addsngltask() {
 
@@ -11,6 +11,7 @@ function Addsngltask() {
     const [title, settitle] = useState('');
     const [desc, setdesc] = useState('');
     const [priority, setpriority] = useState('High');
+    const [deadline, setDeadline] = useState('');
 
     const navigate = useNavigate();
     const { id } = useParams();
@@ -42,6 +43,7 @@ function Addsngltask() {
                     title,
                     desc,
                     priority,
+                    deadline,
                     assignedTo: selectedMembers.map(m => m._id)
                 }
             );
@@ -127,6 +129,18 @@ function Addsngltask() {
                                     <option value="Medium">Medium Priority</option>
                                     <option value="Low">Low Priority</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div className="input-wrapper">
+                            <label>Deadline</label>
+                            <div className="input-icon-group">
+                                <Calendar size={18} className="input-icon" />
+                                <input
+                                    type="date"
+                                    value={deadline}
+                                    onChange={(e) => setDeadline(e.target.value)}
+                                    required
+                                />
                             </div>
                         </div>
                     </div>

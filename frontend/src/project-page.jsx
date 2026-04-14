@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './project-page.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Plus, Eye, PlusCircle, Trash2, FolderDot, Users, X } from 'lucide-react';
+import { Plus, Eye, PlusCircle, Trash2, FolderDot, Users, X, Calendar, Clock } from 'lucide-react';
 
 function Project() {
     const navigate = useNavigate();
@@ -14,8 +14,12 @@ function Project() {
 
     const [selectedProject, setSelectedProject] = useState(null);
     const [friends, setFriends] = useState([]);
+    const [filterFriends, setFilterFriends] = useState([]);
     const [projectMembers, setProjectMembers] = useState([]);
     const [membersModalOpen, setMembersModalOpen] = useState(false);
+    
+    const [filterType, setFilterType] = useState('all'); // all, mine, friend
+    const [selectedFriendId, setSelectedFriendId] = useState('');
 
     function cppage() { navigate("/create-project"); }
     function viewbutton(id) { navigate(`/projectdetails/${id}`); }
@@ -87,7 +91,22 @@ function Project() {
                 console.log(err);
             }
         };
+
+        const fetchFriendsForFilter = async () => {
+            if (user?._id) {
+                try {
+                    const res = await axios.get("http://localhost:3003/all-users", {
+                        params: { userId: user._id }
+                    });
+                    setFilterFriends(res.data);
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+        };
+
         fetchProjects();
+        fetchFriendsForFilter();
     }, [reload]);
 
     return (
@@ -97,13 +116,52 @@ function Project() {
                     <h1>Active Projects</h1>
                     <p className="page-subtitle">Manage your workspaces and track team progress</p>
                 </div>
-                <button className="primary header-btn" onClick={cppage}>
-                    <Plus size={18} /> New Project
-                </button>
+                <div className="header-actions">
+                    <div className="filter-container">
+                        <select 
+                            className="filter-select" 
+                            value={filterType === 'friend' ? selectedFriendId : filterType}
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                if (val === 'all' || val === 'mine') {
+                                    setFilterType(val);
+                                    setSelectedFriendId('');
+                                } else {
+                                    setFilterType('friend');
+                                    setSelectedFriendId(val);
+                                }
+                            }}
+                        >
+                            <option value="all">All Projects</option>
+                            <option value="mine">My Projects</option>
+                            <optgroup label="Friends">
+                                {filterFriends.map(f => (
+                                    <option key={f._id} value={f._id}>{f.name || f.email}</option>
+                                ))}
+                            </optgroup>
+                        </select>
+                    </div>
+                    <button className="primary header-btn" onClick={cppage}>
+                        <Plus size={18} /> New Project
+                    </button>
+                </div>
             </div>
 
             <div className="project-grid">
-                {projectdata.filter(p => p.owner === user?._id || p.members?.includes(user?._id)).map((p) => (
+                {projectdata
+                    .filter(p => {
+                        const ownerId = typeof p.owner === 'object' ? p.owner?._id : p.owner;
+                        const isAccessible = ownerId === user?._id || p.members?.includes(user?._id);
+                        if (!isAccessible) return false;
+
+                        if (filterType === 'mine') return ownerId === user?._id;
+                        if (filterType === 'friend') return ownerId === selectedFriendId;
+                        return true;
+                    })
+                    .map((p) => {
+                        const ownerId = typeof p.owner === 'object' ? p.owner?._id : p.owner;
+                        const ownerName = typeof p.owner === 'object' ? p.owner?.name : p.owner;
+                        return (
                     <div className="project-card" key={p._id}>
                         <div className="project-header">
                             <div className="project-icon">
@@ -114,14 +172,30 @@ function Project() {
 
                         <div className="project-meta">
                             <span className="meta-label">Owner</span>
-                            <span className="meta-value">{p.owner}</span>
+                            <span className="meta-value">{ownerName || 'Unknown Owner'}</span>
+                        </div>
+
+                        <div className="project-meta">
+                            <span className="meta-label">Deadline</span>
+                            <span className="meta-value">
+                                <Calendar size={14} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
+                                {p.deadline ? new Date(p.deadline).toLocaleDateString() : 'No Deadline'}
+                            </span>
+                        </div>
+
+                        <div className="project-meta">
+                            <span className="meta-label">Created On</span>
+                            <span className="meta-value">
+                                <Clock size={14} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
+                                {new Date(p.createdAt).toLocaleDateString()}
+                            </span>
                         </div>
 
                         <div className="project-actions">
                             <button className="action-view" onClick={() => viewbutton(p._id)}>
                                 <Eye size={16} /> View
                             </button>
-                            {p.owner === user?._id && (
+                            {ownerId === user?._id && (
                                 <>
                                     <button className="action-add" onClick={() => editbutton(p._id)}>
                                         <PlusCircle size={16} /> Task
@@ -136,7 +210,7 @@ function Project() {
                             )}
                         </div>
                     </div>
-                ))}
+                );})}
             </div>
 
             {membersModalOpen && (

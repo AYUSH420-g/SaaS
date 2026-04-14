@@ -14,6 +14,18 @@ import {
 function Home() {
     const navigate = useNavigate();
     const location = useLocation();
+    
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : null;
+
+    const getInitials = (name) => {
+        if (!name) return "U";
+        const parts = name.split(' ');
+        if (parts.length > 1) {
+            return (parts[0][0] + parts[1][0]).toUpperCase();
+        }
+        return name.slice(0, 2).toUpperCase();
+    };
 
     const menuItems = [
         { path: "/dashboard", icon: <LayoutDashboard size={20} />, label: "Dashboard" },
@@ -66,7 +78,7 @@ function Home() {
                         {/* Placeholder for future search */}
                     </div>
                     <div className="topbar-actions">
-                        <div className="user-avatar">AD</div>
+                        <div className="user-avatar" title={user?.name}>{getInitials(user?.name)}</div>
                     </div>
                 </header>
 

@@ -6,9 +6,9 @@ import Task from "../models/task.model.js";
 const proj=async (req,res)=>{
 
     try{
-        const{name,owner,desc,members}=req.body;
+        const{name,owner,desc,members,deadline}=req.body;
         const project=new Project({
-            name,owner,desc,
+            name,owner,desc,deadline,
             members: Array.isArray(members) ? members : []
         });
         await project.save();
@@ -24,7 +24,7 @@ const proj=async (req,res)=>{
 const dproj=async (req,res)=>{
 
     try{
-         const projects = await Project.find();
+         const projects = await Project.find().populate('owner', 'name');
          res.status(200).json(projects);
 
     }

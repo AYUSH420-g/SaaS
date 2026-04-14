@@ -42,6 +42,9 @@ const taskSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Project",
       required: true
+    },
+    deadline: {
+      type: Date
     }
   },
   {
