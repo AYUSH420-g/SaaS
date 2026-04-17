@@ -17,12 +17,14 @@ app.use("/",projectRoutes);
 app.use("/auth", authRoutes);
 app.use("/friend", friendRoutes);
 
-const PORT = 3003;
+
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.log(err));
 
+const PORT = process.env.PORT || 3003;
+
 app.listen(PORT, () => {
-    console.log("server listen on port 3003");
+    console.log(`Server running on port ${PORT}`);
 });
