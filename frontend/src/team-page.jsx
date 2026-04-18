@@ -28,7 +28,7 @@ function Team() {
                 try {
                     if (!input.trim()) {
                         if (user?._id) {
-                            const res = await axios.get("http://localhost:3003/friend/friends", {
+                            const res = await axios.get(`${import.meta.env.VITE_API_URL}/friend/friends`, {
                                 params: { userId: user._id }
                             });
                             const friendsData = res.data.map(req => {
@@ -44,7 +44,7 @@ function Team() {
                         return;
                     }
 
-                    const res = await axios.get("http://localhost:3003/search-data", {
+                    const res = await axios.get(`${import.meta.env.VITE_API_URL}/search-data`, {
                         params: { query: input }
                     });
 
@@ -68,7 +68,7 @@ function Team() {
         try {
             setSendingTo(receiverId);
 
-            await axios.post("http://localhost:3003/friend/send", {
+            await axios.post(`${import.meta.env.VITE_API_URL}/friend/send`, {
                 senderId: user._id,
                 receiverId
             });

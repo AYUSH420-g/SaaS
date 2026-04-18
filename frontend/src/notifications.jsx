@@ -41,7 +41,7 @@ function Notifications() {
     const handleAccept = async (requestId, senderName) => {
         try {
             setActionLoading(requestId);
-            await axios.put(`http://localhost:3003/friend/accept/${requestId}`);
+            await axios.put(`${import.meta.env.VITE_API_URL}/friend/accept/${requestId}`);
             setRequests(prev => prev.filter(r => r._id !== requestId));
             showToast(`You are now friends with ${senderName || 'this user'}!`, 'success');
         } catch (err) {
@@ -55,7 +55,7 @@ function Notifications() {
     const handleReject = async (requestId) => {
         try {
             setActionLoading(requestId);
-            await axios.put(`http://localhost:3003/friend/reject/${requestId}`);
+            await axios.put(`${import.meta.env.VITE_API_URL}/friend/reject/${requestId}`);
             setRequests(prev => prev.filter(r => r._id !== requestId));
             showToast('Request declined', 'info');
         } catch (err) {

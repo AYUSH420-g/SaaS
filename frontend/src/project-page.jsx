@@ -41,12 +41,12 @@ function Project() {
         setMembersModalOpen(true);
         if (user?._id) {
             try {
-                const friendsRes = await axios.get("http://localhost:3003/all-users", {
+                const friendsRes = await axios.get(`${import.meta.env.VITE_API_URL}/all-users`, {
                     params: { userId: user._id }
                 });
                 setFriends(friendsRes.data);
                 
-                const memRes = await axios.get(`http://localhost:3003/getmember/${projectId}`);
+                const memRes = await axios.get(`${import.meta.env.VITE_API_URL}/getmember/${projectId}`);
                 setProjectMembers(memRes.data.map(m => m._id));
             } catch(e) {
                 console.log(e);
@@ -64,13 +64,13 @@ function Project() {
     const toggleMember = async (friendId) => {
         try {
             if (projectMembers.includes(friendId)) {
-                await axios.post("http://localhost:3003/removemember", {
+                await axios.post(`${import.meta.env.VITE_API_URL}/removemember`, {
                     projectId: selectedProject,
                     memberId: friendId
                 });
                 setProjectMembers(prev => prev.filter(id => id !== friendId));
             } else {
-                await axios.post("http://localhost:3003/addmember", {
+                await axios.post(`${import.meta.env.VITE_API_URL}/addmember`, {
                     projectId: selectedProject,
                     memberId: friendId
                 });
@@ -84,7 +84,7 @@ function Project() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const res = await axios.get("http://localhost:3003/displayproject");
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/displayproject`);
                 setprojdata(res.data);
                 console.log("in");
             } catch (err) {
@@ -95,7 +95,7 @@ function Project() {
         const fetchFriendsForFilter = async () => {
             if (user?._id) {
                 try {
-                    const res = await axios.get("http://localhost:3003/all-users", {
+                    const res = await axios.get(`${import.meta.env.VITE_API_URL}/all-users`, {
                         params: { userId: user._id }
                     });
                     setFilterFriends(res.data);

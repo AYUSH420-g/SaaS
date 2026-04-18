@@ -34,7 +34,7 @@ function Projectdetails() {
         setTaskMembers(t.assignedTo || []);
         setMembersModalOpen(true);
         try {
-            const r = await axios.get(`http://localhost:3003/getmember/${id}`);
+            const r = await axios.get(`${import.meta.env.VITE_API_URL}/getmember/${id}`);
             setProjectMembers(r.data);
         } catch(e) {
             console.log(e);
@@ -51,14 +51,14 @@ function Projectdetails() {
     const toggleTaskMember = async (memberId) => {
         try {
             if (taskMembers.includes(memberId)) {
-                await axios.post("http://localhost:3003/task/removemember", {
+                await axios.post(`${import.meta.env.VITE_API_URL}/task/removemember`, {
                     taskId: selectedTask,
                     memberId: memberId
                 });
                 setTaskMembers(prev => prev.filter(i => i !== memberId));
                 setdata(d.map(t => t._id === selectedTask ? {...t, assignedTo: t.assignedTo.filter(i => i !== memberId)} : t));
             } else {
-                await axios.post("http://localhost:3003/task/addmember", {
+                await axios.post(`${import.meta.env.VITE_API_URL}/task/addmember`, {
                     taskId: selectedTask,
                     memberId: memberId
                 });
@@ -73,7 +73,7 @@ function Projectdetails() {
     useEffect(() => {
         const fetchdata = async () => {
             try {
-                const res = await axios.get(`http://localhost:3003/gettask/${id}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/gettask/${id}`);
                 setdata(res.data);
             } catch (err) {
                 console.log(err);

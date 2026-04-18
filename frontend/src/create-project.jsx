@@ -38,7 +38,7 @@ function Createproj() {
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:3003/createproject", 
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/createproject`, 
                 {  name,
                     owner:user._id,
                     desc,
