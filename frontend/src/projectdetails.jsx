@@ -19,7 +19,7 @@ function Projectdetails() {
 
     const deletebtn=async(_id)=>{
         try{
-            const res=await axios.delete(`http://localhost:3003/deletetask/${_id}`);
+            const res=await axios.delete(`${import.meta.env.VITE_API_URL}/deletetask/${_id}`);
             setflag(!flag);
         }
         catch(err)

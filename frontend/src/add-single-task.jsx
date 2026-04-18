@@ -19,7 +19,7 @@ function Addsngltask() {
     useEffect(() => {
         const call = async () => {
             try {
-                const r = await axios.get(`http://localhost:3003/getmember/${id}`);
+                const r = await axios.get(`${import.meta.env.VITE_API_URL}/getmember/${id}`);
                 setUsers(r.data);  
             } catch (err) {
                 console.log(err);
@@ -38,7 +38,7 @@ function Addsngltask() {
 
         try {
             const res = await axios.post(
-                `http://localhost:3003/createtask/${id}`,
+                `${import.meta.env.VITE_API_URL}/createtask/${id}`,
                 {
                     title,
                     desc,

@@ -27,7 +27,7 @@ function Project() {
 
     const delbutton = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:3003/deleteproj/${id}`);
+            const res = await axios.delete(`${import.meta.env.VITE_API_URL}/deleteproj/${id}`);
             console.log(res.data);
             console.log("Successfully deleted");
             setreload(reload => !reload);

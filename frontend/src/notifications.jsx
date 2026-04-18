@@ -14,7 +14,7 @@ function Notifications() {
     const fetchRequests = async () => {
         try {
             setLoading(true);
-            const res = await axios.get("http://localhost:3003/friend/requests", {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/friend/requests`, {
                 params: { userId: user._id }
             });
             setRequests(res.data);

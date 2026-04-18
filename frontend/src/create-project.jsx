@@ -21,7 +21,7 @@ function Createproj() {
         try {
             
 
-            const res = await axios.get("http://localhost:3003/all-users",{
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/all-users`,{
                    params: {
                     userId: user._id
                 }

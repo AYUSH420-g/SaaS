@@ -17,7 +17,7 @@ function Dashboard() {
 
         const fun=async()=>{
 
-            const res=await axios.get(`http://localhost:3003/getcount/${user._id}`);
+            const res=await axios.get(`${import.meta.env.VITE_API_URL}/getcount/${user._id}`);
             console.log(res.data);
             // console.log(res.data.pending);
             

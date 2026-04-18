@@ -34,7 +34,7 @@ function Task() {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const res = await axios.get(`http://localhost:3003/displaytask/${user._id}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/displaytask/${user._id}`);
                 settask(res.data);
             } catch (err) {
                 console.log(err);
@@ -44,7 +44,7 @@ function Task() {
         const fetchFriendsForFilter = async () => {
             if (user?._id) {
                 try {
-                    const res = await axios.get("http://localhost:3003/all-users", {
+                    const res = await axios.get(`${import.meta.env.VITE_API_URL}/all-users`, {
                         params: { userId: user._id }
                     });
                     setFilterFriends(res.data);
