@@ -155,3 +155,42 @@
         transform: translateY(0) scale(1);
     }
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+    .add-member-box {
+        flex-direction: column;
+    }
+
+    .add-member-box input {
+        width: 100%;
+    }
+
+    .team-card {
+        flex-wrap: wrap;
+        gap: var(--sp-100);
+    }
+
+    .add-friend-btn {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        margin-top: var(--sp-100);
+    }
+
+    .team-toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .member-contact {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .contact-link {
+        font-size: 13px;
+        word-break: break-all;
+    }
+}

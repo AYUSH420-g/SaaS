@@ -142,3 +142,42 @@
     text-decoration: underline;
     text-shadow: 0 0 10px var(--neon-cyan-glow);
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+    .auth-bg-glow {
+        width: 300px;
+        height: 300px;
+    }
+
+    .auth-container {
+        padding: var(--sp-200);
+    }
+
+    .auth-header h1 {
+        font-size: 26px;
+    }
+
+    .auth-form {
+        padding: var(--sp-300) var(--sp-200);
+    }
+
+    .input-icon-group input {
+        height: 44px;
+    }
+
+    .submit-btn {
+        height: 44px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .auth-header h1 {
+        font-size: 22px;
+    }
+
+    .auth-header p {
+        font-size: 13px;
+    }
+}

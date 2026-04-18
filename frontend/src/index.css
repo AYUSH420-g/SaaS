@@ -420,7 +420,44 @@ label {
 }
 
 .lozenge.low {
-  background: var(--status-success-bg);
-  color: var(--status-success);
-  border-color: rgba(16, 185, 129, 0.3);
+    background: var(--status-success-bg);
+    color: var(--status-success);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* ============================================================
+   Global Mobile Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Prevent iOS zoom on input focus */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="date"],
+    textarea,
+    select {
+        font-size: 16px;
+    }
+
+    /* Ensure minimum touch-target size (44px) */
+    button,
+    input[type="submit"] {
+        min-height: 40px;
+    }
+
+    /* Smaller base font */
+    :root {
+        font-size: 13px;
+    }
+
+    /* Glass panels: less padding on mobile */
+    .glass-panel {
+        padding: var(--sp-200);
+    }
+}
+
+@media (max-width: 400px) {
+    :root {
+        font-size: 13px;
+    }
 }

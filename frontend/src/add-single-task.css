@@ -72,3 +72,11 @@
         align-self: flex-start;
     }
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+    .form-container {
+        max-width: 100%;
+        padding: var(--sp-300);
+    }
+}

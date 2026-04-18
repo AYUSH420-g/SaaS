@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import './home.css';
 import {
@@ -5,18 +6,37 @@ import {
     FolderKanban,
     CheckSquare,
     Users,
+    MessageCircle,
     Bell,
     Settings,
     LogOut,
-    Hexagon
+    Hexagon,
+    Menu,
+    X
 } from 'lucide-react';
 
 function Home() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     
     const storedUser = localStorage.getItem("user");
     const user = storedUser ? JSON.parse(storedUser) : null;
+
+    // Close sidebar on route change (mobile)
+    useEffect(() => {
+        setSidebarOpen(false);
+    }, [location.pathname]);
+
+    // Prevent body scroll when sidebar overlay is open
+    useEffect(() => {
+        if (sidebarOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [sidebarOpen]);
 
     const getInitials = (name) => {
         if (!name) return "U";
@@ -32,6 +52,7 @@ function Home() {
         { path: "/project-page", icon: <FolderKanban size={20} />, label: "Projects" },
         { path: "/task-page", icon: <CheckSquare size={20} />, label: "Tasks" },
         { path: "/team-page", icon: <Users size={20} />, label: "People" },
+        { path: "/messages", icon: <MessageCircle size={20} />, label: "Messages" },
         { path: "/notifications", icon: <Bell size={20} />, label: "Notifications" },
         { path: "/setting", icon: <Settings size={20} />, label: "Settings" }
     ];
@@ -43,10 +64,18 @@ function Home() {
 
     return (
         <div className="app-layout">
-            <aside className="sidebar">
+            {/* Mobile overlay backdrop */}
+            {sidebarOpen && (
+                <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />
+            )}
+
+            <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
                     <Hexagon size={28} className="brand-logo" />
                     <h2>TaskHive</h2>
+                    <button className="sidebar-close-btn" onClick={() => setSidebarOpen(false)}>
+                        <X size={22} />
+                    </button>
                 </div>
 
                 <nav className="sidebar-nav">
@@ -74,6 +103,9 @@ function Home() {
 
             <main className="main-content">
                 <header className="topbar">
+                    <button className="hamburger-btn" onClick={() => setSidebarOpen(true)}>
+                        <Menu size={24} />
+                    </button>
                     <div className="topbar-search">
                         {/* Placeholder for future search */}
                     </div>

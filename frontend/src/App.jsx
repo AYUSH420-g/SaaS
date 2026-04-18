@@ -11,6 +11,7 @@ import CreateProject from './create-project';
 import Projectdetails from './projectdetails';
 import Ast from './add-single-task';
 import Notifications from './notifications';
+import Messages from './messages';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path='/team-page' element={<Team/>}/>
         <Route path='/setting' element={<Setting/>}/>
         <Route path='/notifications' element={<Notifications/>}/>
+        <Route path='/messages' element={<Messages/>}/>
         <Route path='/create-project' element={<CreateProject/>}/>
         <Route path='/projectdetails/:id' element={<Projectdetails/>}/>
         <Route path='/add-single-task/:id' element={<Ast/>}/>

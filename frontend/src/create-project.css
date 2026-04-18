@@ -121,3 +121,19 @@
     background: #3b82f6;
     border-radius: 10px;
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+    .form-container {
+        max-width: 100%;
+        padding: var(--sp-300);
+    }
+
+    .input-icon-group select {
+        min-height: 100px;
+    }
+
+    .auth-form {
+        padding: var(--sp-300) var(--sp-200);
+    }
+}

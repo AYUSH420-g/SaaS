@@ -123,35 +123,35 @@ function Task() {
                     <tbody>
                         {sortedTasks.map((t) => (
                             <tr key={t._id}>
-                                <td className="task-title-cell">
+                                <td className="task-title-cell" data-label="Task">
                                     <div className="title-wrapper">
                                         {getStatusIcon(t.status)}
                                         <span className="task-title-text">{t.title}</span>
                                     </div>
                                 </td>
-                                <td className="project-name-cell">
+                                <td className="project-name-cell" data-label="Project">
                                     <span className="project-badge">
                                         {t.project_id?.name || 'No Project'}
                                     </span>
                                 </td>
-                                <td className="created-cell">
+                                <td className="created-cell" data-label="Created">
                                      <span className="created-text">
                                         <Clock size={14} style={{ marginRight: '6px', opacity: 0.7 }} />
                                         {new Date(t.createdAt).toLocaleDateString()}
                                     </span>
                                 </td>
-                                <td className="deadline-cell">
+                                <td className="deadline-cell" data-label="Deadline">
                                     <span className="deadline-text">
                                         <Calendar size={14} style={{ marginRight: '6px', opacity: 0.7 }} />
                                         {t.deadline ? new Date(t.deadline).toLocaleDateString() : 'N/A'}
                                     </span>
                                 </td>
-                                <td>
+                                <td data-label="Status">
                                     <span className={`status-text ${(t.status?.toLowerCase() || "").replace(' ', '-')}`}>
                                         {t.status || "Todo"}
                                     </span>
                                 </td>
-                                <td>{getPriorityIcon(t.priority)}</td>
+                                <td data-label="Priority">{getPriorityIcon(t.priority)}</td>
                             </tr>
                         ))}
                     </tbody>

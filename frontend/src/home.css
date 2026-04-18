@@ -1,12 +1,17 @@
 /* ============================================================
    home.css — App Layout Shell (TaskHive)
-   Dark Mode Sidebar & Topbar
+   Dark Mode Sidebar & Topbar — Mobile-First Responsive
    ============================================================ */
 
 .app-layout {
     display: flex;
     min-height: 100vh;
     background-color: var(--bg-app);
+}
+
+/* ── Sidebar Overlay (Mobile Only) ── */
+.sidebar-overlay {
+    display: none;
 }
 
 /* ── Sidebar ── */
@@ -21,7 +26,7 @@
     display: flex;
     flex-direction: column;
     z-index: 100;
-    transition: all var(--transition-fast);
+    transition: transform 0.3s var(--ease-out);
 }
 
 /* ── Brand Header ── */
@@ -46,6 +51,25 @@
     background: linear-gradient(90deg, #fff, var(--text-muted));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* Close button hidden on desktop */
+.sidebar-close-btn {
+    display: none;
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.sidebar-close-btn:hover {
+    color: var(--text-main);
+    background: var(--bg-surface-hover);
+    transform: none;
 }
 
 /* ── Navigation ── */
@@ -173,6 +197,24 @@
     z-index: 50;
 }
 
+/* Hamburger hidden on desktop */
+.hamburger-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    padding: var(--sp-100);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    box-shadow: none;
+}
+
+.hamburger-btn:hover {
+    background: var(--bg-surface-hover);
+    transform: none;
+}
+
 .topbar-actions {
     display: flex;
     align-items: center;
@@ -212,4 +254,92 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — max-width: 768px
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Sidebar slides off-screen by default */
+    .sidebar {
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Show overlay backdrop */
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(2px);
+        z-index: 99;
+        animation: fadeIn 0.2s ease-out;
+    }
+
+    /* Show close button inside sidebar on mobile */
+    .sidebar-close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Remove left margin, content takes full width */
+    .main-content {
+        margin-left: 0;
+    }
+
+    /* Show hamburger menu button */
+    .hamburger-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Topbar: tighter padding */
+    .topbar {
+        padding: 0 var(--sp-200);
+    }
+
+    /* Content: smaller padding */
+    .content-wrapper {
+        padding: var(--sp-200);
+    }
+
+    /* Page header stacks on mobile */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--sp-200);
+        margin-bottom: var(--sp-300);
+    }
+
+    /* Smaller h1 on mobile */
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+}
+
+/* ── Extra small phones ── */
+@media (max-width: 400px) {
+    .content-wrapper {
+        padding: var(--sp-150);
+    }
+
+    h1 {
+        font-size: 20px;
+    }
 }

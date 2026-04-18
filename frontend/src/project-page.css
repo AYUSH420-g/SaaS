@@ -444,3 +444,77 @@
     background: var(--status-danger);
     color: #fff;
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+    /* Header actions stack */
+    .header-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--sp-150);
+        width: 100%;
+    }
+
+    .filter-select {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .header-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Single column project grid */
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: var(--sp-200);
+    }
+
+    .project-card {
+        padding: var(--sp-200);
+    }
+
+    /* Project actions: wrap on small screens */
+    .project-actions {
+        flex-wrap: wrap;
+        gap: var(--sp-100);
+    }
+
+    .project-actions button {
+        font-size: 12px;
+        height: 32px;
+        min-width: 0;
+    }
+
+    /* Modal: full width on mobile */
+    .members-modal {
+        width: 95%;
+        max-height: 85vh;
+    }
+
+    .modal-header h2 {
+        font-size: 16px;
+    }
+
+    .member-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--sp-150);
+    }
+
+    .toggle-member-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .project-actions {
+        flex-direction: column;
+    }
+
+    .project-actions button {
+        width: 100%;
+    }
+}
