@@ -16,7 +16,7 @@ function Signup() {
         e.preventDefault();
         setError(null);
         try {
-            const res = await axios.post("http://localhost:3003/auth/signup", { name, email, pass });
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, { name, email, pass });
             navigate("/login");
         } catch (err) {
             setError(err.response?.data?.message || err.message || "An error occurred");
